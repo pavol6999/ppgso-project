@@ -58,12 +58,12 @@ SceneWindow::SceneWindow(const int width, const int height) : Window{"kokot pica
  */
 void SceneWindow::onIdle() {
     // Track time
-    static auto time = (float) glfwGetTime();
+    //static auto time = (float) glfwGetTime();
 
     // Compute time delta
-    float dt = animate ? (float) glfwGetTime() - time : 0;
+    //float dt = animate ? (float) glfwGetTime() - time : 0;
 
-    time = (float) glfwGetTime();
+    //time = (float) glfwGetTime();
 
     // Set gray background
     glClearColor(.5f, .5f, .5f, 0);
