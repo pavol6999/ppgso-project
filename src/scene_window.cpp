@@ -3,9 +3,7 @@
 //
 
 #include "scene_window.h"
-#include "scene.h"
-#include <ppgso/ppgso.h>
-#include <string>
+
 
 void SceneWindow::createIndoorScene() {
     //auto indoorScene = std::make_shared<Scene>(*this);

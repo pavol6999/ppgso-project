@@ -9,15 +9,15 @@
 //
 // Created by FIIT STU on 11/19/2021.
 //
-#include "scene.h"
-#include "scene_window.h"
 #include <ppgso/ppgso.h>
 #include <string>
+#include "scene.h"
 
+class Scene;
 
 class SceneWindow : public ppgso::Window {
 private:
-   // std::vector<std::shared_ptr<Scene>> scenes;
+    std::vector<std::shared_ptr<Scene>> scenes;
     size_t activeScene = 0; // set the active scene
     //bool animate = true;
 

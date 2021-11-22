@@ -8,8 +8,6 @@
 
 #include "scene_window.h"
 
-//#include "camera.h"
-//
 class SceneWindow;
 
 /*

@@ -1,6 +1,4 @@
 #include "scene.h"
-#include "scene_window.h"
-#include <string>
 
 void Scene::update(float time) {
 //    auto i = std::begin(objects);
