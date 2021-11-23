@@ -14,7 +14,7 @@ public:
   glm::vec3 position{0,0,0};
   glm::vec3 back{0,0,-1};
 
-  glm::mat4 viewMatrix;
+  glm::mat4 viewMatrix = translate(glm::mat4{1.0f}, {0.0f, 0.0f, 0.f});
   glm::mat4 projectionMatrix;
 
   /*!
