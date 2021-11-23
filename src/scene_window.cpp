@@ -6,7 +6,7 @@
 #include "skybox.h"
 
 
-void SceneWindow::createIndoorScene() {
+//void SceneWindow::createIndoorScene() {
     //auto indoorScene = std::make_shared<Scene>(*this);
    //scenes.push_back(indoorScene);
 
@@ -18,14 +18,12 @@ void SceneWindow::createIndoorScene() {
 //    scene.camera = move(camera);
 
 
-}
-
 void SceneWindow::createOutdoorScene() {
     scene.objects.clear();
 
     // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
-    camera->position.z = -15.0f;
+    camera->position.z = 15.0f;
     scene.camera = move(camera);
 
     // Add space background
@@ -35,7 +33,6 @@ void SceneWindow::createOutdoorScene() {
 
 SceneWindow::SceneWindow(const int width, const int height) : Window{"kokot pica", width, height}
 {
-
     // Initialize OpenGL state
     // Enable Z-buffer
     glEnable(GL_DEPTH_TEST);

@@ -13,19 +13,15 @@
 #include <string>
 #include "scene.h"
 
-class Scene;
-
 class SceneWindow : public ppgso::Window {
 private:
-
+    Scene scene;
     // size_t activeScene = 0; // set the active scene
     //bool animate = true;
 
     void createOutdoorScene();
-    void createIndoorScene();
 
 public:
-    Scene scene;
 
     /*!
      * Construct custom game window

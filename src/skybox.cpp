@@ -20,20 +20,23 @@ bool SkyBox::update(Scene &scene, float dt) {
 }
 
 void SkyBox::render(Scene &scene) {
-    // Disable writing to the depth buffer so we render a "background"
-    glDepthMask(GL_FALSE);
 
     // NOTE: this object does not use camera, just renders the entire quad as is
-    shader->use();
+    shader->setUniform("LightDirection", {0, 0, 0});
 
-    // Render mesh, not using any projections, we just render in 2D
+
+    // use camera
+    shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+    shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
+
+    // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
-    shader->setUniform("ViewMatrix", glm::mat4{1.0f});
-    shader->setUniform("ProjectionMatrix", glm::mat4{1.0f});
     shader->setUniform("Texture", *texture);
-    mesh->render();
+    shader->setUniform("ambientIntensity", 1.0f);
+    shader->setUniform("Transparency", 1.0f);
+    shader->setUniform("CameraPosition", {0.,1,0.});
 
-    glDepthMask(GL_TRUE);
+    mesh->render();
 }
 
 // shared resources

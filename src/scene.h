@@ -6,11 +6,9 @@
 #include <list>
 #include <string>
 
-#include "scene_window.h"
 #include "camera.h"
 #include "object.h"
 
-class SceneWindow;
 
 /*
  * Scene is an object that will aggregate all scene related data
@@ -28,8 +26,6 @@ public:
      * Render all objects in the scene
      */
     virtual void render();
-
-    SceneWindow &window;
 
     glm::vec3 bgColor = {0, 0, 0};
 
