@@ -17,14 +17,16 @@ class Scene;
 
 class SceneWindow : public ppgso::Window {
 private:
-    std::vector<std::shared_ptr<Scene>> scenes;
-    size_t activeScene = 0; // set the active scene
+
+    // size_t activeScene = 0; // set the active scene
     //bool animate = true;
 
     void createOutdoorScene();
     void createIndoorScene();
 
 public:
+    Scene scene;
+
     /*!
      * Construct custom game window
      */

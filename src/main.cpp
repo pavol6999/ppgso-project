@@ -14,7 +14,6 @@ const unsigned int SIZE = 1024;
 int main() {
 
     // Initialize our window
-    std::string string = "automaty";
     SceneWindow window = SceneWindow(SIZE, SIZE);
     while (window.pollEvents()) {}
 
