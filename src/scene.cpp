@@ -1,7 +1,5 @@
 #include "scene.h"
 
-
-
 void Scene::update(float time) {
     camera->update();
 

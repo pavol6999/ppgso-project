@@ -29,12 +29,12 @@ void SkyBox::render(Scene &scene) {
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-    shader->setUniform("ViewMatrix", translate(glm::mat4{1.0f}, {0.f, 0.f, 0.f}));
+    shader->setUniform("ViewMatrix", translate(glm::mat4{1.0f}, {0.0f, 0.0f, 0.f}));
 
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
-    shader->setUniform("CameraPosition", {0.,0.,0.});
+    shader->setUniform("CameraPosition", {0.,10.,0.});
 
     mesh->render();
 }

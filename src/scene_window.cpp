@@ -26,6 +26,8 @@ void SceneWindow::createOutdoorScene() {
     camera->position.z = 15.0f;
     scene.camera = move(camera);
 
+    scene.camera->viewMatrix = translate(glm::mat4{1.0f}, {0.0f, 0.0f, 0.f});
+
     // Add space background
     scene.objects.push_back(std::make_unique<SkyBox>());
 }
@@ -59,6 +61,7 @@ void SceneWindow::onIdle() {
     //time = (float) glfwGetTime();
 
     // Set gray background
+
     glClearColor(.5f, .5f, .5f, 0);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

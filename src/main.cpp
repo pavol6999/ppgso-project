@@ -14,6 +14,7 @@ const unsigned int SIZE = 1024;
 int main() {
 
     // Initialize our window
+    auto penis = ppgso::image::loadBMP("heightmap.bmp");
     SceneWindow window = SceneWindow(SIZE, SIZE);
     while (window.pollEvents()) {}
 
