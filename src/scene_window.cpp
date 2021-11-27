@@ -22,11 +22,12 @@ void SceneWindow::createOutdoorScene() {
     scene.objects.clear();
 
     // Create a camera
-    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
+    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 1000.0f);
     camera->position.z = 15.0f;
+
     scene.camera = move(camera);
 
-    scene.camera->viewMatrix = translate(glm::mat4{1.0f}, {0.0f, 0.0f, 0.f});
+    //scene.camera->viewMatrix = translate(glm::mat4{1.0f}, {0.0f, 0.0f, 0.f});
 
     // Add space background
     scene.objects.push_back(std::make_unique<SkyBox>());
