@@ -43,22 +43,9 @@ Camera::Camera(float fow, float ratio, float near, float far) {
 
     key_frames.push_back({glm::vec3{0,2,50},
                           glm::vec3{0,0,0},
-                          200,
-                          0,
-                          {0,0,0},
-                          {0,0,0}
-    });
-//    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{50,2,50}, 200, 0, {0,0,0}, {0,0,0}});
-//    key_frames.push_back({glm::vec3{0,2,50},
-//                          glm::vec3{0,0,0},
-//                          200,
-//                          0,
-//                          {0,0,0},
-//                          {0,0,0}
-//                         });
-//    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{-50,2,50}, 200, 0, {0,0,0}, {0,0,0}});
-//    key_frames.push_back({glm::vec3{0,15,25}, glm::vec3{0,0,0}, 200, 0, {0,0,0}, {0,0,0}});
-//    key_frames.push_back({glm::vec3{0,2,20}, 200, 0, {0,0,0}});
+                          200});
+    key_frames.push_back({glm::vec3{0,15,25},glm::vec3{0,0,0}, 200});
+
 
     projectionMatrix = glm::perspective(fowInRad, ratio, near, far);
 }

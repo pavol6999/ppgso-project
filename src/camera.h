@@ -19,9 +19,9 @@ public:
         const glm::vec3 position;
         const glm::vec3 center;
         const uint32_t duration;
-        uint32_t curr_step;
-        glm::vec3 step_pos;
-        glm::vec3 step_cent;
+        uint32_t curr_step = 0;
+        glm::vec3 step_pos = {0,0,0};
+        glm::vec3 step_cent = {0,0,0};
     };
 
     std::vector<key_frame> key_frames;
