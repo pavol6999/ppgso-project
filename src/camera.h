@@ -10,12 +10,27 @@
  */
 class Camera {
 public:
-  glm::vec3 up{0,1,0};
-  glm::vec3 position{0,0,0};
-  glm::vec3 back{0,0,-1};
+    glm::vec3 up{0,1,0};
+    glm::vec3 position{0,2,50};
+    glm::vec3 back{0,0,-1};
+    glm::vec3 center{0.,0.,0.};
 
-  glm::mat4 viewMatrix;
-  glm::mat4 projectionMatrix;
+    struct key_frame {
+        const glm::vec3 position;
+        const glm::vec3 center;
+        const uint32_t duration;
+        uint32_t curr_step;
+        glm::vec3 step_pos;
+        glm::vec3 step_cent;
+    };
+
+    std::vector<key_frame> key_frames;
+    size_t current_key = 0;
+
+    glm::mat4 viewMatrix;
+    glm::mat4 projectionMatrix;
+
+
 
   /*!
    * Create new Camera that will generate viewMatrix and projectionMatrix based on its position, up and back vectors
@@ -24,13 +39,14 @@ public:
    * @param near - Distance to the near frustum plane
    * @param far - Distance to the far frustum plane
    */
-  Camera(float fow = 45.0f, float ratio = 1.0f, float near = 0.1f, float far = 10.0f);
+  Camera(float fow = 45.0f, float ratio = 1.0f, float near = 0.1f, float far = 500.0f);
 
   /*!
    * Update Camera viewMatrix based on up, position and back vectors
    */
-  void update();
+  void update(float dt);
 
+  void animate();
   /*!
    * Get direction vector in world coordinates through camera projection plane
    * @param u - camera projection plane horizontal coordinate [-1,1]

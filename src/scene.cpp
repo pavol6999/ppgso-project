@@ -1,7 +1,7 @@
 #include "scene.h"
 
 void Scene::update(float time) {
-    camera->update();
+    camera->update(time);
 
     auto i = std::begin(objects);
     while (i != std::end(objects)) {

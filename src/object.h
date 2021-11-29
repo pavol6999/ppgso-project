@@ -13,6 +13,9 @@ class Scene;
  *  All objects in the scene should be able to update and render
  *  Generally we also want to keep position, rotation and scale for each object to generate a modelMatrix
  */
+
+constexpr glm::vec3 wind = {0.1,0,0};
+
 class Object {
 public:
   // Define default constructors as this is an abstract class

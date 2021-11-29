@@ -4,6 +4,8 @@
 
 #include "scene_window.h"
 #include "skybox.h"
+#include "building.h"
+#include "tumbleweed.h"
 
 
 //void SceneWindow::createIndoorScene() {
@@ -22,14 +24,15 @@ void SceneWindow::createOutdoorScene() {
     scene.objects.clear();
 
     // Create a camera
-    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
-    camera->position.z = 15.0f;
+    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 250.0f);
     scene.camera = move(camera);
 
-    scene.camera->viewMatrix = translate(glm::mat4{1.0f}, {0.0f, 0.0f, 0.f});
-
-    // Add space background
+    // Add background
     scene.objects.push_back(std::make_unique<SkyBox>());
+    scene.objects.push_back(std::make_unique<Building>());
+    for (int i = 0; i < 10; i++)
+        scene.objects.push_back(std::make_unique<Tumbleweed>());
+
 }
 
 
@@ -57,8 +60,6 @@ void SceneWindow::onIdle() {
 
     // Compute time delta
     float dt = (float) glfwGetTime() - time;
-
-    //time = (float) glfwGetTime();
 
     // Set gray background
 
