@@ -30,9 +30,11 @@ Camera::Camera(float fow, float ratio, float near, float far) {
     projectionMatrix = glm::perspective(fowInRad, ratio, near, far);
 }
 
+
 void Camera::update(float dt) {
     animate(dt);
     viewMatrix = lookAt(position, center, up);
+
 }
 
 glm::vec3 Camera::cast(double u, double v) {

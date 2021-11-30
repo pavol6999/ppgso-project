@@ -10,6 +10,7 @@
  */
 class Camera {
 public:
+
     glm::vec3 up{0,1,0};
     glm::vec3 position{0,2,50};
     glm::vec3 back{0,0,-1};
@@ -52,5 +53,6 @@ public:
      * @return Normalized vector from camera position to position on the camera projection plane
      */
     glm::vec3 cast(double u, double v);
+
 };
 
