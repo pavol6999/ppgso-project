@@ -20,13 +20,13 @@ private:
     //bool animate = true;
 
     void createOutdoorScene();
-
+    void generateTerrain(int TERRAIN_SIZE, int cactus_count);
 public:
 
     /*!
      * Construct custom game window
      */
-    SceneWindow(const int width, const int height);
+    SceneWindow(int width, int height);
 
     /*!
      * Window update implementation that will be called automatically from pollEvents

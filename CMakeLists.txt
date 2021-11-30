@@ -67,7 +67,8 @@ set(PPGSO_SHADER_SRC
         shader/convolution_vert.glsl shader/convolution_frag.glsl
         shader/diffuse_vert.glsl shader/diffuse_frag.glsl
         shader/texture_vert.glsl shader/texture_frag.glsl
-        )
+        shader/test_vert.glsl shader/test_frag.glsl)
+
 add_resources(shaders ${PPGSO_SHADER_SRC})
 
 # PPGSO library
@@ -100,7 +101,9 @@ target_include_directories(ppgso PUBLIC
 #
 # TARGETS
 #
-add_executable(skalican_krajkovic_project src/main.cpp src/scene_window.cpp src/scene.cpp src/camera.cpp src/VirtualObject.cpp src/object.cpp src/skybox.cpp src/skybox.h)
+
+add_executable(skalican_krajkovic_project src/utilities/utils.cpp src/main.cpp src/scene_window.cpp src/scene.cpp src/staticObject.cpp src/camera.cpp  src/terrain_desert.cpp src/object.cpp src/skybox.cpp src/skybox.h src/building.h src/builidng.cpp src/tumbleweed.h src/tumbleweed.cpp)
+
 target_link_libraries(skalican_krajkovic_project ppgso shaders)
 install (TARGETS skalican_krajkovic_project DESTINATION .)
 add_custom_command(TARGET skalican_krajkovic_project POST_BUILD COMMAND  ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/ ${CMAKE_CURRENT_BINARY_DIR})

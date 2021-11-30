@@ -11,12 +11,22 @@ SkyBox::SkyBox() {
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("sky_clear.bmp"));
-    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("skydome.obj");
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("skybox.obj");
 
-    scale = {50,50,50};
+    scale = {200,200,200};
+}
+
+SkyBox::SkyBox(glm::vec3 scale_new) {
+    // Initialize static resources if needed
+    if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("sky_clear.bmp"));
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("skybox.obj");
+
+    scale = scale_new;
 }
 
 bool SkyBox::update(Scene &scene, float dt) {
+    rotation.x += 0.005;
     generateModelMatrix();
     return true;
 }
@@ -29,12 +39,12 @@ void SkyBox::render(Scene &scene) {
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
-    shader->setUniform("ViewMatrix", translate(glm::mat4{1.0f}, {0.0f, 0.0f, 0.f}));
+    shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
-    shader->setUniform("CameraPosition", {0.,10.,0.});
+    shader->setUniform("CameraPosition", scene.camera->position);
 
     mesh->render();
 }
