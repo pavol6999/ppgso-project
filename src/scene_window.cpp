@@ -83,6 +83,8 @@ void SceneWindow::onIdle() {
 
     // Compute time delta
     float dt = (float) glfwGetTime() - time;
+    time = (float) glfwGetTime();
+
 
     // Set gray background
 

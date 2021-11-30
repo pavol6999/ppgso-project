@@ -2,37 +2,19 @@
 
 #include "camera.h"
 
-constexpr glm::vec3 step = {0,0,0};
-
-glm::vec3 calc_step(glm::vec3 start, glm::vec3 end, uint32_t steps) {
-    glm::vec3 diff = end - start;
-    diff /= steps;
-    return diff;
-}
-
-void Camera::animate() {
+void Camera::animate(float dt) {
     if (current_key == key_frames.size() - 1) {
         position = key_frames[current_key].position;
         center = key_frames[current_key].center;
         return;
     }
-    if (key_frames[current_key].step_pos == step) {
-        key_frames[current_key].step_pos = calc_step(key_frames[current_key].position, key_frames[current_key + 1].position,
-                                                 key_frames[current_key].duration);
-    }
-    if (key_frames[current_key].step_cent == step) {
-        key_frames[current_key].step_cent = calc_step(key_frames[current_key].center, key_frames[current_key + 1].center,
-                                                     key_frames[current_key].duration);
-    }
-    glm::vec3 curr_step = {key_frames[current_key].curr_step, key_frames[current_key].curr_step,
-                           key_frames[current_key].curr_step};
 
+    position += (dt*(key_frames[current_key + 1].position - key_frames[current_key].position))/key_frames[current_key].duration;
+    center += (dt*(key_frames[current_key + 1].center - key_frames[current_key].center))/key_frames[current_key].duration;
 
-    position = key_frames[current_key].position + key_frames[current_key].step_pos * curr_step;
-    center = key_frames[current_key].center + key_frames[current_key].step_cent * curr_step;
-    key_frames[current_key].curr_step++;
+    key_frames[current_key].age += dt;
 
-    if (key_frames[current_key].curr_step == key_frames[current_key].duration) {
+    if (key_frames[current_key].age >= key_frames[current_key].duration.x) {
         current_key++;
     }
 }
@@ -41,17 +23,15 @@ void Camera::animate() {
 Camera::Camera(float fow, float ratio, float near, float far) {
     float fowInRad = (ppgso::PI/180.0f) * fow;
 
-    key_frames.push_back({glm::vec3{0,2,50},
-                          glm::vec3{0,0,0},
-                          200});
-    key_frames.push_back({glm::vec3{0,15,25},glm::vec3{0,0,0}, 200});
-
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,0,0},glm::vec3{5,5,5}});
+    key_frames.push_back({glm::vec3{0,15,25},glm::vec3{0,0,0}, glm::vec3{5,5,5}});
+    key_frames.push_back({glm::vec3{0,2,10},glm::vec3{0,2,0}, glm::vec3{5,5,5}});
 
     projectionMatrix = glm::perspective(fowInRad, ratio, near, far);
 }
 
 void Camera::update(float dt) {
-    animate();
+    animate(dt);
     viewMatrix = lookAt(position, center, up);
 }
 

@@ -6,6 +6,8 @@
 
 #include <bits/stdc++.h>
 #include "utils.h"
+#include <iostream>
+#include <cmath>
 #include <ppgso.h>
 
 
@@ -14,9 +16,9 @@ std::vector<glm::vec3> Utils::generatePoints(int radius, int n, glm::vec2 center
     std::vector<glm::vec3> points;
 
     // calculate radius and subtract offset so objects do not generate at the edge of the plane
+    radius -= 10;
 
-
-    for (int i = 0; i < n; i++){
+    while((int)points.size() != n){
         // calculate angle theta
         double theta = 2 * ppgso::PI * uniform();
 
@@ -26,15 +28,11 @@ std::vector<glm::vec3> Utils::generatePoints(int radius, int n, glm::vec2 center
         float x = center.x + len * cos(theta);
         float y = center.y + len * sin(theta);
 
-        // if the point is located inside the casino
-        if( -3 < x && x < 3)
-        {
-            x += x + 16;
-        }
-        if( -3 < y && y < 3)
-        {
-            y += y - 16;
-        }
+        // if the point is located near the casino
+        double d = sqrt(pow((x - center.x),2) + pow((y - center.y),2));
+        std::cout << d << "\n";
+        if ( d < 30 )
+            continue;
 
 
         // the y coordinate is actually the z in our world system
