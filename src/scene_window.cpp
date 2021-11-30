@@ -6,6 +6,7 @@
 #include "skybox.h"
 #include "building.h"
 #include "tumbleweed.h"
+#include "terrain_desert.h"
 
 
 //void SceneWindow::createIndoorScene() {
@@ -29,6 +30,8 @@ void SceneWindow::createOutdoorScene() {
 
     // Add background
     scene.objects.push_back(std::make_unique<SkyBox>());
+
+    scene.objects.push_back(std::make_unique<terrain_desert>());
     scene.objects.push_back(std::make_unique<Building>());
     for (int i = 0; i < 10; i++)
         scene.objects.push_back(std::make_unique<Tumbleweed>());
