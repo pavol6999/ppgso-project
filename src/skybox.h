@@ -15,8 +15,9 @@ private:
     static std::unique_ptr<ppgso::Texture> texture;
 
 public:
+    SkyBox() = default;
+    SkyBox(glm::vec3 scale);
 
-    SkyBox();
 
     bool update(Scene &scene, float dt) override;
 

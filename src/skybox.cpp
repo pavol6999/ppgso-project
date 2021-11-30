@@ -16,6 +16,15 @@ SkyBox::SkyBox() {
     scale = {200,200,200};
 }
 
+SkyBox::SkyBox(glm::vec3 scale_new) {
+    // Initialize static resources if needed
+    if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("sky_clear.bmp"));
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("skydome.obj");
+
+    scale = scale_new;
+}
+
 bool SkyBox::update(Scene &scene, float dt) {
     generateModelMatrix();
     return true;

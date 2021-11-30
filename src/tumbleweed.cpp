@@ -18,7 +18,7 @@ Tumbleweed::Tumbleweed() {
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("tumble.obj");
 
     scale = {0.25, 0.25, 0.25};
-    position = {rand()%50 - 50, 0, rand()%10+10};
+    position = {rand()%50 - 50, 0.5, rand()%10+10};
 
 
 }

@@ -5,6 +5,8 @@
 #include "staticObject.h"
 #include <shaders/texture_vert_glsl.h>
 #include <shaders/texture_frag_glsl.h>
+#include <shaders/test_frag_glsl.h>
+#include <shaders/test_vert_glsl.h>
 
 std::unique_ptr<ppgso::Mesh> StaticObject::mesh[num_obj];
 std::unique_ptr<ppgso::Shader> StaticObject::shader;
@@ -41,6 +43,10 @@ void StaticObject::render(Scene &scene) {
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
     // render mesh
+    shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
+    shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
+
+
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture[obj_id]);
     shader->setUniform("CameraPosition", scene.camera->position);
