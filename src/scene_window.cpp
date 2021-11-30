@@ -8,7 +8,7 @@
 #include "tumbleweed.h"
 #include "terrain_desert.h"
 #include "staticObject.h"
-
+#include "utilities/utils.h"
 
 //void SceneWindow::createIndoorScene() {
     //auto indoorScene = std::make_shared<Scene>(*this);
@@ -21,25 +21,37 @@
 //    camera->position.z = -15.0f;
 //    scene.camera = move(camera);
 
+void SceneWindow::generateTerrain(int TERRAIN_SIZE, int object_count) {
+    std::vector<glm::vec3> points = Utils::generatePoints(TERRAIN_SIZE, object_count, {0,0});
+    for(glm::vec3 pos : points)
+    {
+        std::cout << pos.x << " " << pos.y << " " << pos.z << '\n';
+        auto object = std::make_unique<StaticObject>(1, pos, glm::vec3 {0,0,0}, glm::vec3 {3,3,3});
+        scene.objects.push_back(move(object));
+    }
+
+
+}
 
 void SceneWindow::createOutdoorScene() {
+    const int TERRAIN_SIZE = 200;
+
+
+
     scene.objects.clear();
+
+    generateTerrain(TERRAIN_SIZE, 200);
 
     // Create a camera
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 250.0f);
     scene.camera = move(camera);
 
     // Add background
-    scene.objects.push_back(std::make_unique<SkyBox>());
+    scene.objects.push_back(std::make_unique<SkyBox>(glm::vec3{TERRAIN_SIZE,TERRAIN_SIZE,TERRAIN_SIZE}));
 
     scene.objects.push_back(std::make_unique<terrain_desert>());
     scene.objects.push_back(std::make_unique<Building>());
 
-    glm::vec3 p = {0, 0, 10}; // floor
-    glm::vec3 r = {0, 0, 0};
-    glm::vec3 s = {1, 1, 1};
-    auto obj = std::make_unique<StaticObject>(1, p, r, s);
-    scene.objects.push_back(move(obj));
 
     for (int i = 0; i < 10; i++)
         scene.objects.push_back(std::make_unique<Tumbleweed>());

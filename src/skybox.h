@@ -15,7 +15,7 @@ private:
     static std::unique_ptr<ppgso::Texture> texture;
 
 public:
-    SkyBox() = default;
+    SkyBox();
     SkyBox(glm::vec3 scale);
 
 

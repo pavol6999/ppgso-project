@@ -6,6 +6,8 @@
 #include <string>
 #include <map>
 
+#include <src/utilities/utils.h>
+
 #include <ppgso/ppgso.h>
 #include "scene_window.h"
 

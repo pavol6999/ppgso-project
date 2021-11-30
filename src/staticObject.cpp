@@ -15,7 +15,7 @@ char *StaticObject::texNames[num_obj] = {"cactus.bmp", "cactus.bmp"};
 char *StaticObject::meshNames[num_obj] = {"cactus.obj","cactus_long.obj"};
 
 
-StaticObject::StaticObject(int obj_id, glm::vec3 position_new, glm::vec3 rotation_new, glm::vec3 scale_new) {
+StaticObject::StaticObject(int obj_id, glm::vec3 position_new, glm::vec3 rotation_new = {0,0,0}, glm::vec3 scale_new = {1,1,1}) {
     this->obj_id = obj_id;
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
     if (!texture[obj_id]) texture[obj_id] = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP(texNames[obj_id]));
@@ -26,6 +26,10 @@ StaticObject::StaticObject(int obj_id, glm::vec3 position_new, glm::vec3 rotatio
     scale = scale_new;
 
 }
+
+
+
+
 
 bool StaticObject::update(Scene &scene, float dt) {
     generateModelMatrix();
