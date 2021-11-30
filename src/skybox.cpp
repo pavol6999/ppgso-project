@@ -13,7 +13,7 @@ SkyBox::SkyBox() {
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("sky_clear.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("skydome.obj");
 
-    scale = {100,100,100};
+    scale = {200,200,200};
 }
 
 bool SkyBox::update(Scene &scene, float dt) {

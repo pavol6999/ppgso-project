@@ -11,10 +11,10 @@
 terrain_desert::terrain_desert() {
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("sandor.bmp"));
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("sand.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("plane.obj");
 
-    scale = {5,1,5};
+    scale = {10,1,10};
     position = {0,0,0};
 }
 

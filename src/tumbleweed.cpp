@@ -20,6 +20,7 @@ Tumbleweed::Tumbleweed() {
     scale = {0.25, 0.25, 0.25};
     position = {rand()%50 - 50, 0, rand()%10+10};
 
+
 }
 
 bool Tumbleweed::update(Scene &scene, float dt) {

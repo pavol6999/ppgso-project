@@ -4,6 +4,7 @@
 #include <map>
 
 #include <glm/glm.hpp>
+#include <glm/vec3.hpp>
 
 // Forward declare a scene
 class Scene;
@@ -15,6 +16,7 @@ class Scene;
  */
 
 constexpr glm::vec3 wind = {0.1,0,0};
+
 
 class Object {
 public:

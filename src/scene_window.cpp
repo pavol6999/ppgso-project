@@ -7,6 +7,7 @@
 #include "building.h"
 #include "tumbleweed.h"
 #include "terrain_desert.h"
+#include "staticObject.h"
 
 
 //void SceneWindow::createIndoorScene() {
@@ -33,6 +34,13 @@ void SceneWindow::createOutdoorScene() {
 
     scene.objects.push_back(std::make_unique<terrain_desert>());
     scene.objects.push_back(std::make_unique<Building>());
+
+    glm::vec3 p = {0, 0, 10}; // floor
+    glm::vec3 r = {0, 0, 0};
+    glm::vec3 s = {1, 1, 1};
+    auto obj = std::make_unique<StaticObject>(1, p, r, s);
+    scene.objects.push_back(move(obj));
+
     for (int i = 0; i < 10; i++)
         scene.objects.push_back(std::make_unique<Tumbleweed>());
 
