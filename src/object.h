@@ -5,6 +5,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/vec3.hpp>
+#include <vector>
 
 // Forward declare a scene
 class Scene;
@@ -42,17 +43,22 @@ public:
   virtual void render(Scene &scene) = 0;
 
 
-  /*!
-   * Event to be called when the object is clicked
-   * @param scene
-   */
-  virtual void onClick(Scene &scene) {};
-
   // Object properties
   glm::vec3 position{0,0,0};
   glm::vec3 rotation{0,0,0};
   glm::vec3 scale{1,1,1};
   glm::mat4 modelMatrix{1};
+
+    struct key_frame {
+        glm::vec3 duration;
+        const glm::vec3 position = position;
+        const glm::vec3 rotation = rotation;
+        const glm::vec3 scale = scale;
+        float age = 0;
+    };
+
+    std::vector<key_frame> key_frames;
+    size_t current_key = 0;
 
 protected:
   /*!

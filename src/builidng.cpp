@@ -24,10 +24,7 @@ Building::Building() {
 }
 
 bool Building::update(Scene &scene, float dt) {
-    modelMatrix =
-            glm::translate(glm::mat4(1.0f), position)
-            * glm::orientate4(rotation)
-            * glm::scale(glm::mat4(1.0f), scale);
+    generateModelMatrix();
     return true;
 }
 

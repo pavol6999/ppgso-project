@@ -16,7 +16,7 @@
  */
 class Scene {
 public:
-    unsigned int age = 0;
+    float age = 0;
 /*!
      * Update all objects in the scene
      * @param time

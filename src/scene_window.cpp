@@ -9,6 +9,7 @@
 #include "terrain_desert.h"
 #include "staticObject.h"
 #include "utilities/utils.h"
+#include "double_doors.h"
 
 //void SceneWindow::createIndoorScene() {
     //auto indoorScene = std::make_shared<Scene>(*this);
@@ -51,6 +52,7 @@ void SceneWindow::createOutdoorScene() {
 
     scene.objects.push_back(std::make_unique<terrain_desert>());
     scene.objects.push_back(std::make_unique<Building>());
+    scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
 
 
     for (int i = 0; i < 10; i++)
@@ -84,7 +86,7 @@ void SceneWindow::onIdle() {
     // Compute time delta
     float dt = (float) glfwGetTime() - time;
     time = (float) glfwGetTime();
-
+    scene.age += dt;
 
     // Set gray background
 
