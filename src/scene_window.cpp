@@ -46,6 +46,7 @@ void SceneWindow::createOutdoorScene() {
     generateTerrain(TERRAIN_SIZE, 200);
 
     // Create a camera
+
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 250.0f);
     scene.camera = move(camera);
 
@@ -59,6 +60,7 @@ void SceneWindow::createOutdoorScene() {
 
     for (int i = 0; i < 10; i++)
         scene.objects.push_back(std::make_unique<Tumbleweed>());
+
 
 }
 

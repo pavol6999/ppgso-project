@@ -100,8 +100,9 @@ target_include_directories(ppgso PUBLIC
 
 #
 # TARGETS
-#
+
 add_executable(skalican_krajkovic_project src/utilities/utils.cpp src/main.cpp src/scene_window.cpp src/scene.cpp src/staticObject.cpp src/camera.cpp  src/terrain_desert.cpp src/object.cpp src/outside_objects/skybox.cpp src/outside_objects/skybox.h src/outside_objects/building.h src/outside_objects/builidng.cpp src/outside_objects/tumbleweed.h src/outside_objects/tumbleweed.cpp src/outside_objects/doors/doors.h src/outside_objects/doors/doors.cpp src/outside_objects/doors/double_doors.h src/outside_objects/doors/double_doors.cpp src/animated_object.h src/animated_object.cpp)
+
 target_link_libraries(skalican_krajkovic_project ppgso shaders)
 install (TARGETS skalican_krajkovic_project DESTINATION .)
 add_custom_command(TARGET skalican_krajkovic_project POST_BUILD COMMAND  ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/data/ ${CMAKE_CURRENT_BINARY_DIR})
