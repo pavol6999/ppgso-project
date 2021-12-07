@@ -49,16 +49,6 @@ public:
   glm::vec3 scale{1,1,1};
   glm::mat4 modelMatrix{1};
 
-    struct key_frame {
-        glm::vec3 duration;
-        const glm::vec3 position = position;
-        const glm::vec3 rotation = rotation;
-        const glm::vec3 scale = scale;
-        float age = 0;
-    };
-
-    std::vector<key_frame> key_frames;
-    size_t current_key = 0;
 
 protected:
   /*!
