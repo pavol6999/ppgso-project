@@ -8,6 +8,7 @@ in vec2 texCoords;
 // (optional) Texture offset
 uniform vec2 TextureOffset;
 
+uniform float Transparency;
 uniform sampler2D Texture;
 uniform vec3 objectColor;
 uniform vec3 lightColor;
@@ -41,5 +42,6 @@ void main()
     //float attenuation = 1.f / (1.f + 0.09*d + 0.032 * pow(d,2));
     vec3 result =  (ambient + diffuse + specular);
     FragColor = texture(Texture, vec2(texCoords.x, 1.0 - texCoords.y)+ TextureOffset) * vec4(result, 1.f);
+    FragColor.a = Transparency;
     //FragColor = texture(Texture, vec2(texCoords.x, 1.0 - texCoords.y)+ TextureOffset) * vec4((diffuse + ambient + specular), 1.f);
 }

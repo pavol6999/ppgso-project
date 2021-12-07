@@ -31,15 +31,22 @@ void SceneWindow::generateTerrain(int TERRAIN_SIZE, int object_count) {
     for(glm::vec3 pos : points)
     {
 
-        int random = (rand() % 3);
+        int random = (rand() % 4);
         if (random == 1 || random == 0) {
             scale = {3,3,3};
             rotation = {0,0,0};
         }
-        else
+        else if(random == 2)
         {
+            int rock_size = rand() % 3;
            scale = {0.5,0.5,0.5};
-           rotation = {0 , rand(), rand()};
+
+
+        }
+        else if (random == 3)
+        {
+
+            scale = {2,2,2};
         }
 
         auto object = std::make_unique<StaticObject>(random, pos, rotation, scale);
@@ -56,7 +63,7 @@ void SceneWindow::createOutdoorScene() {
 
     scene.objects.clear();
 
-//    generateTerrain(TERRAIN_SIZE, 300);
+    generateTerrain(TERRAIN_SIZE, 300);
 
     // Create a camera
 
@@ -71,7 +78,7 @@ void SceneWindow::createOutdoorScene() {
     scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
     scene.objects.push_back(std::make_unique<SlotMachine>());
 
-    scene.objects.push_back(std::make_unique<StaticObject>(1,glm::vec3  {0,0,15},glm::vec3 {0,0,0},glm::vec3{3,3,3}));
+    scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {0,0,15},glm::vec3 {0,0,0},glm::vec3{1,1,1}));
 
 
     for (int i = 0; i < 10; i++)
@@ -81,7 +88,7 @@ void SceneWindow::createOutdoorScene() {
 }
 
 
-SceneWindow::SceneWindow(const int width, const int height) : Window{"kokot pica", width, height}
+SceneWindow::SceneWindow(const int width, const int height) : Window{"uz sme si to vsimli, pardon", width, height}
 {
     // Initialize OpenGL state
     // Enable Z-buffer
