@@ -10,7 +10,7 @@
 #include <glm/gtx/euler_angles.hpp>
 #include <shaders/test_vert_glsl.h>
 #include <shaders/test_frag_glsl.h>
-#include "scene.h"
+#include "src/scene.h"
 #include "building.h"
 
 Building::Building() {

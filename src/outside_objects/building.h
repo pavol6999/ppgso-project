@@ -5,6 +5,9 @@
 #ifndef PPGSO_BUILDING_H
 #define PPGSO_BUILDING_H
 
+#include <src/object.h>
+#include <mesh.h>
+
 class Building final : public Object {
 private:
     static std::unique_ptr<ppgso::Mesh> mesh;
