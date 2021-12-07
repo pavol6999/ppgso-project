@@ -3,12 +3,15 @@
 //
 
 #include "scene_window.h"
-#include "skybox.h"
-#include "building.h"
-#include "tumbleweed.h"
+#include "src/outside_objects/skybox.h"
+#include "src/outside_objects/building.h"
+#include "src/outside_objects/tumbleweed.h"
 #include "terrain_desert.h"
 #include "staticObject.h"
 #include "utilities/utils.h"
+#include "src/outside_objects/doors/double_doors.h"
+#include "src/interior_objects/slot_machine/screen.h"
+#include "src/interior_objects/slot_machine/slot_machine.h"
 
 //void SceneWindow::createIndoorScene() {
     //auto indoorScene = std::make_shared<Scene>(*this);
@@ -52,7 +55,8 @@ void SceneWindow::createOutdoorScene() {
 
     scene.objects.push_back(std::make_unique<terrain_desert>());
     scene.objects.push_back(std::make_unique<Building>());
-
+    scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
+    scene.objects.push_back(std::make_unique<SlotMachine>());
 
     for (int i = 0; i < 10; i++)
         scene.objects.push_back(std::make_unique<Tumbleweed>());
@@ -86,7 +90,7 @@ void SceneWindow::onIdle() {
     // Compute time delta
     float dt = (float) glfwGetTime() - time;
     time = (float) glfwGetTime();
-
+    scene.age += dt;
 
     // Set gray background
 

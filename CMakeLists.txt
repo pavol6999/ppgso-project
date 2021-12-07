@@ -81,7 +81,7 @@ add_library(ppgso STATIC
         ppgso/image_raw.cpp
         ppgso/texture.cpp
         ppgso/window.cpp
-        )
+        src/interior_objects/slot_machine/slot_machine.h src/interior_objects/slot_machine/screen.h src/interior_objects/slot_machine/slot_machine.cpp src/interior_objects/slot_machine/screen.cpp)
 
 # Make sure GLM uses radians and GLEW is a static library
 target_compile_definitions(ppgso PUBLIC -DGLM_FORCE_RADIANS -DGLEW_STATIC)
@@ -100,9 +100,8 @@ target_include_directories(ppgso PUBLIC
 
 #
 # TARGETS
-#
 
-add_executable(skalican_krajkovic_project src/utilities/utils.cpp src/main.cpp src/scene_window.cpp src/scene.cpp src/staticObject.cpp src/camera.cpp  src/terrain_desert.cpp src/object.cpp src/skybox.cpp src/skybox.h src/building.h src/builidng.cpp src/tumbleweed.h src/tumbleweed.cpp)
+add_executable(skalican_krajkovic_project src/utilities/utils.cpp src/main.cpp src/scene_window.cpp src/scene.cpp src/staticObject.cpp src/camera.cpp  src/terrain_desert.cpp src/object.cpp src/outside_objects/skybox.cpp src/outside_objects/skybox.h src/outside_objects/building.h src/outside_objects/builidng.cpp src/outside_objects/tumbleweed.h src/outside_objects/tumbleweed.cpp src/outside_objects/doors/doors.h src/outside_objects/doors/doors.cpp src/outside_objects/doors/double_doors.h src/outside_objects/doors/double_doors.cpp src/animated_object.h src/animated_object.cpp)
 
 target_link_libraries(skalican_krajkovic_project ppgso shaders)
 install (TARGETS skalican_krajkovic_project DESTINATION .)
