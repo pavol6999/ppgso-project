@@ -12,6 +12,7 @@
 #include "src/outside_objects/doors/double_doors.h"
 #include "src/interior_objects/slot_machine/screen.h"
 #include "src/interior_objects/slot_machine/slot_machine.h"
+#include "src/interior_objects/roulette/roulette_table.h"
 
 //void SceneWindow::createIndoorScene() {
     //auto indoorScene = std::make_shared<Scene>(*this);
@@ -70,6 +71,7 @@ void SceneWindow::createOutdoorScene() {
     scene.objects.push_back(std::make_unique<Building>());
     scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
     scene.objects.push_back(std::make_unique<SlotMachine>());
+    scene.objects.push_back(std::make_unique<RouletteTable>(glm::vec3{0,0,2},glm::vec3{0,0,0}));
 
     scene.objects.push_back(std::make_unique<StaticObject>(1,glm::vec3  {0,0,15},glm::vec3 {0,0,0},glm::vec3{3,3,3}));
 
