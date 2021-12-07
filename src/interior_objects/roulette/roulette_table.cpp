@@ -27,7 +27,7 @@ RouletteTable::RouletteTable(glm::vec3 pos, glm::vec3 rot) {
     position = pos;
     rotation = rot;
     scale = {0.25,0.25,0.25};
-    wheel = std::make_unique<RouletteWheel>(position, rotation, scale);
+    wheel = std::make_unique<RouletteWheel>(*this);
 }
 
 bool RouletteTable::update(Scene &scene, float dt) {

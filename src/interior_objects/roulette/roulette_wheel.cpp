@@ -9,21 +9,21 @@
 #include "src/scene.h"
 #include "roulette_wheel.h"
 
-RouletteWheel::RouletteWheel(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc) {
+RouletteWheel::RouletteWheel(RouletteTable &table): table(table){
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("roulette_Tex.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("wheel.obj");
 
-    position = pos;
-    rotation = rot;
-    scale = sc;
-    moving = std::make_unique<RouletteMoving>(position, rotation, scale);
+    moving = std::make_unique<RouletteMoving>(*this);
 }
 
 bool RouletteWheel::update(Scene &scene, float dt) {
     moving->update(scene,dt);
-    generateModelMatrix();
+    modelMatrix =
+            glm::translate(glm::mat4(1.0f), position + table.position)
+            * glm::orientate4(rotation + table.rotation)
+            * glm::scale(glm::mat4(1.0f), table.scale);
     return true;
 }
 
