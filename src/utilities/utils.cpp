@@ -25,12 +25,23 @@ std::vector<glm::vec3> Utils::generatePoints(int radius, int n, glm::vec2 center
         // Get length from center
         double len = sqrt(uniform()) * radius;
 
-        float x = center.x + len * cos(theta);
-        float y = center.y + len * sin(theta);
+        float x = round((center.x + len * cos(theta))/2)*2;
+        float y = round((center.y + len * sin(theta))/2)*2;
 
+        bool dont_generate = false;
+        for(auto i: points){
+            if ( abs(x - i.x) < 3 && abs(y - i.z) < 3) {
+                dont_generate = true;
+                continue;
+            }
+        }
+        if (dont_generate)
+        {
+            continue;
+        }
         // if the point is located near the casino
         double d = sqrt(pow((x - center.x),2) + pow((y - center.y),2));
-        std::cout << d << "\n";
+
         if ( d < 30 )
             continue;
 

@@ -26,10 +26,23 @@
 
 void SceneWindow::generateTerrain(int TERRAIN_SIZE, int object_count) {
     std::vector<glm::vec3> points = Utils::generatePoints(TERRAIN_SIZE, object_count, {0,0});
+    glm::vec3 scale;
+    glm::vec3 rotation;
     for(glm::vec3 pos : points)
     {
-        std::cout << pos.x << " " << pos.y << " " << pos.z << '\n';
-        auto object = std::make_unique<StaticObject>(1, pos, glm::vec3 {0,0,0}, glm::vec3 {3,3,3});
+
+        int random = (rand() % 3);
+        if (random == 1 || random == 0) {
+            scale = {3,3,3};
+            rotation = {0,0,0};
+        }
+        else
+        {
+           scale = {0.5,0.5,0.5};
+           rotation = {0 , rand(), rand()};
+        }
+
+        auto object = std::make_unique<StaticObject>(random, pos, rotation, scale);
         scene.objects.push_back(move(object));
     }
 
@@ -43,7 +56,7 @@ void SceneWindow::createOutdoorScene() {
 
     scene.objects.clear();
 
-    generateTerrain(TERRAIN_SIZE, 200);
+//    generateTerrain(TERRAIN_SIZE, 300);
 
     // Create a camera
 
@@ -57,6 +70,9 @@ void SceneWindow::createOutdoorScene() {
     scene.objects.push_back(std::make_unique<Building>());
     scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
     scene.objects.push_back(std::make_unique<SlotMachine>());
+
+    scene.objects.push_back(std::make_unique<StaticObject>(1,glm::vec3  {0,0,15},glm::vec3 {0,0,0},glm::vec3{3,3,3}));
+
 
     for (int i = 0; i < 10; i++)
         scene.objects.push_back(std::make_unique<Tumbleweed>());

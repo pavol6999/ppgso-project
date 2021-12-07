@@ -26,7 +26,10 @@ SkyBox::SkyBox(glm::vec3 scale_new) {
 }
 
 bool SkyBox::update(Scene &scene, float dt) {
-    rotation.x += 0.005;
+    if (scene.age <= 3){
+        rotation.x += 0.005;
+    }
+
     generateModelMatrix();
     return true;
 }
