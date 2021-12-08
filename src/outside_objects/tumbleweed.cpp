@@ -42,6 +42,7 @@ void Tumbleweed::render(Scene &scene) {
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
+    shader->setUniform("Transparency", 1);
     shader->setUniform("CameraPosition", scene.camera->position);
 
     mesh->render();

@@ -20,7 +20,15 @@ constexpr glm::vec3 wind = {0.1,0,0};
 
 
 class Object {
+
 public:
+    struct Material {
+            glm::vec3 ambient;
+            glm::vec3 diffuse;
+            glm::vec3 specular;
+            float shininess;
+    };
+    Material material;
   // Define default constructors as this is an abstract class
   Object() = default;
   Object(const Object&) = default;

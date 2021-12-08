@@ -15,10 +15,11 @@ uniform mat4 ModelMatrix;
 void main()
 {
 
-    aNormal = Normal;
+    //aNormal = Normal;
+    aNormal = mat3(transpose(inverse(ModelMatrix))) * Normal;
     gl_Position = ProjectionMatrix * ViewMatrix * ModelMatrix * vec4(Position, 1.0);
     texCoords = TexCoord;
-    //FragPos = vec3(gl_Position);
+
     FragPos = vec3(ModelMatrix * vec4(Position, 1.0));
 
 }

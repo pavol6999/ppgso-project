@@ -54,7 +54,7 @@ void StaticObject::render(Scene &scene) {
     shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
     shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
     shader->setUniform("lightPos",  scene.camera->position);
-
+    shader->setUniform("Transparency", 1.0f);
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture[obj_id]);
     shader->setUniform("CameraPosition", scene.camera->position);

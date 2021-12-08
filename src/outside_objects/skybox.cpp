@@ -45,6 +45,7 @@ void SkyBox::render(Scene &scene) {
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
     // render mesh
+    shader->setUniform("Transparency", 1.0f);
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
     shader->setUniform("CameraPosition", scene.camera->position);

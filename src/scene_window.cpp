@@ -76,11 +76,11 @@ void SceneWindow::createOutdoorScene() {
 
     scene.objects.push_back(std::make_unique<terrain_desert>());
     scene.objects.push_back(std::make_unique<Building>());
-    scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
+
     scene.objects.push_back(std::make_unique<SlotMachine>());
     scene.objects.push_back(std::make_unique<RouletteTable>(glm::vec3{0,0,2},glm::vec3{0,0,0}));
-
-    scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {0,0,15},glm::vec3 {0,0,0},glm::vec3{1,1,1}));
+    scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
+    scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {0,0,15},glm::vec3 {0,0,1},glm::vec3{1,1,1}));
 
 
     for (int i = 0; i < 10; i++)
@@ -96,6 +96,12 @@ SceneWindow::SceneWindow(const int width, const int height) : Window{"uz sme si 
     // Enable Z-buffer
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+
 
     // Enable polygon culling
     glEnable(GL_CULL_FACE);

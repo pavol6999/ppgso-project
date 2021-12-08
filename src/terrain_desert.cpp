@@ -35,7 +35,7 @@ void terrain_desert::render(Scene &scene) {
     shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
     shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
     shader->setUniform("lightPos", {0,100,0});
-
+    shader->setUniform("Transparency", 1.0f);
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
     shader->setUniform("CameraPosition", scene.camera->position);
