@@ -42,6 +42,13 @@ void SlotMachine::render(Scene &scene) {
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
+
+
+    // render mesh
+    shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
+    shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
+    shader->setUniform("lightPos",  scene.camera->position);
+    shader->setUniform("Transparency", 1);
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);

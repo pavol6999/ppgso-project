@@ -28,25 +28,35 @@ bool Screen::update(Scene &scene, float dt) {
 
 void Screen::render(Scene &scene) {
     // Disable writing to the depth buffer so we render a "background"
-    glDepthMask(GL_FALSE);
+
 
     // NOTE: this object does not use camera, just renders the entire quad as is
     shader->use();
 
     // Pass UV mapping offset to the shader
-    shader->setUniform("TextureOffset", textureOffset);
+    shader->setUniform("LightDirection", {0, 0, 0});
 
+
+    // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
+
+
+    // render mesh
+    shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
+    shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
+    shader->setUniform("lightPos",  scene.camera->position);
+    shader->setUniform("Transparency", 1);
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
     shader->setUniform("CameraPosition", scene.camera->position);
+    shader->setUniform("TextureOffset",textureOffset);
 
     mesh->render();
 
-    glDepthMask(GL_TRUE);
+
 }
 
 // shared resources

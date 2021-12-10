@@ -14,7 +14,7 @@ class StaticObject : public Object {
 
 private:
     int obj_id;
-    const static int num_obj = 3;
+    const static int num_obj = 4;
 
     static std::unique_ptr<ppgso::Mesh> mesh[num_obj];
     static std::unique_ptr<ppgso::Shader> shader;

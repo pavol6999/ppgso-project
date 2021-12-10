@@ -12,8 +12,8 @@
 std::unique_ptr<ppgso::Mesh> StaticObject::mesh[num_obj];
 std::unique_ptr<ppgso::Shader> StaticObject::shader;
 std::unique_ptr<ppgso::Texture> StaticObject::texture[num_obj];
-char *StaticObject::texNames[num_obj] = {"cactus.bmp", "cactus.bmp","stone.bmp"};
-char *StaticObject::meshNames[num_obj] = {"cactus.obj","cactus_long.obj","stone.obj"};
+char *StaticObject::texNames[num_obj] = {"cactus.bmp", "cactus.bmp","stone.bmp","rock.bmp"};
+char *StaticObject::meshNames[num_obj] = {"cactus.obj","cactus_long.obj","stone.obj", "rock.obj"};
 const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 
 StaticObject::StaticObject(int obj_id, glm::vec3 position_new, glm::vec3 rotation_new = {0,0,0}, glm::vec3 scale_new = {1,1,1}) {
@@ -54,7 +54,7 @@ void StaticObject::render(Scene &scene) {
     shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
     shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
     shader->setUniform("lightPos",  scene.camera->position);
-
+    shader->setUniform("Transparency", 1.0f);
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture[obj_id]);
     shader->setUniform("CameraPosition", scene.camera->position);
