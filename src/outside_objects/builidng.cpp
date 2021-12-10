@@ -21,7 +21,7 @@ Building::Building() {
                          {0.50754f,0.50754f,0.50754f},{0.508273f,0.508273f,0.508273f},0.4};
 
     // Initialize static resources if needed
-    if (!shader) shader = std::make_unique<ppgso::Shader>(test_vert_glsl, phongo_frag_glsl);
+    if (!shader) shader = std::make_unique<ppgso::Shader>(test_vert_glsl, test_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("casino.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("casino.obj");
 
