@@ -1,5 +1,5 @@
 //
-// Created by Administrator on 07/12/2021.
+// Created by Administrator on 10/12/2021.
 //
 
 #include <shaders/texture_vert_glsl.h>
@@ -7,27 +7,26 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include "src/scene.h"
-#include "roulette_wheel.h"
+#include "human.h"
 
-RouletteWheel::RouletteWheel(RouletteTable &table): table(table){
+Human::Human(glm::vec3 pos, glm::vec3 rot) {
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("roulette_Tex.bmp"));
-    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("wheel.obj");
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("human.bmp"));
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("human.obj");
 
-    moving = std::make_unique<RouletteMoving>(*this);
+    position = pos;
+    rotation = rot;
+    arm = std::make_unique<Arm>(*this);
 }
 
-bool RouletteWheel::update(Scene &scene, float dt) {
-    moving->update(scene,dt);
-    modelMatrix =
-            glm::translate(glm::mat4(1.0f), position + table.position)
-            * glm::orientate4(rotation + table.rotation)
-            * glm::scale(glm::mat4(1.0f), table.scale);
+bool Human::update(Scene &scene, float dt) {
+    arm->update(scene,dt);
+    generateModelMatrix();
     return true;
 }
 
-void RouletteWheel::render(Scene &scene) {
+void Human::render(Scene &scene) {
     // NOTE: this object does not use camera, just renders the entire quad as is
     shader->setUniform("LightDirection", {0, 0, 0});
 
@@ -47,11 +46,11 @@ void RouletteWheel::render(Scene &scene) {
     shader->setUniform("CameraPosition", scene.camera->position);
     mesh->render();
 
-    moving->render(scene);
+    arm->render(scene);
 }
 
 // shared resources
-std::unique_ptr<ppgso::Mesh> RouletteWheel::mesh;
-std::unique_ptr<ppgso::Shader> RouletteWheel::shader;
-std::unique_ptr<ppgso::Texture> RouletteWheel::texture;
+std::unique_ptr<ppgso::Mesh> Human::mesh;
+std::unique_ptr<ppgso::Shader> Human::shader;
+std::unique_ptr<ppgso::Texture> Human::texture;
 

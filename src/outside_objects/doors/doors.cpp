@@ -20,7 +20,7 @@ Doors::Doors(glm::vec3 pos) {
 
 
 bool Doors::update(Scene &scene, float dt) {
-    if (scene.age >= 10) { animate(dt);}
+    if (scene.age >= 15) { animate(dt);}
     generateModelMatrix();
     return true;
 }

@@ -1,5 +1,5 @@
 //
-// Created by Administrator on 07/12/2021.
+// Created by Administrator on 10/12/2021.
 //
 
 #include <shaders/texture_vert_glsl.h>
@@ -7,27 +7,25 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include "src/scene.h"
-#include "roulette_wheel.h"
+#include "arm.h"
 
-RouletteWheel::RouletteWheel(RouletteTable &table): table(table){
+Arm::Arm(Human &human): human(human){
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("roulette_Tex.bmp"));
-    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("wheel.obj");
-
-    moving = std::make_unique<RouletteMoving>(*this);
+    if (!mesh) mesh = std::make_unique<ppgso::Mesh>("arm.obj");
 }
 
-bool RouletteWheel::update(Scene &scene, float dt) {
-    moving->update(scene,dt);
+bool Arm::update(Scene &scene, float dt) {
+    rotation.x += 0.01;
     modelMatrix =
-            glm::translate(glm::mat4(1.0f), position + table.position)
-            * glm::orientate4(rotation + table.rotation)
-            * glm::scale(glm::mat4(1.0f), table.scale);
+            glm::translate(glm::mat4(1.0f), position + human.position)
+            * glm::orientate4(rotation + human.rotation)
+            * glm::scale(glm::mat4(1.0f), human.scale);
     return true;
 }
 
-void RouletteWheel::render(Scene &scene) {
+void Arm::render(Scene &scene) {
     // NOTE: this object does not use camera, just renders the entire quad as is
     shader->setUniform("LightDirection", {0, 0, 0});
 
@@ -46,12 +44,10 @@ void RouletteWheel::render(Scene &scene) {
     shader->setUniform("Texture", *texture);
     shader->setUniform("CameraPosition", scene.camera->position);
     mesh->render();
-
-    moving->render(scene);
 }
 
 // shared resources
-std::unique_ptr<ppgso::Mesh> RouletteWheel::mesh;
-std::unique_ptr<ppgso::Shader> RouletteWheel::shader;
-std::unique_ptr<ppgso::Texture> RouletteWheel::texture;
+std::unique_ptr<ppgso::Mesh> Arm::mesh;
+std::unique_ptr<ppgso::Shader> Arm::shader;
+std::unique_ptr<ppgso::Texture> Arm::texture;
 

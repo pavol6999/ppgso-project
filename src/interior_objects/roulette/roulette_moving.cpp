@@ -37,13 +37,16 @@ void RouletteMoving::render(Scene &scene) {
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
     // render mesh
+    shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
+    shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
+    shader->setUniform("lightPos",  scene.camera->position);
+    shader->setUniform("Transparency", 1);
+    // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
     shader->setUniform("CameraPosition", scene.camera->position);
-
     mesh->render();
 }
-
 // shared resources
 std::unique_ptr<ppgso::Mesh> RouletteMoving::mesh;
 std::unique_ptr<ppgso::Shader> RouletteMoving::shader;

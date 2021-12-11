@@ -103,7 +103,7 @@ target_include_directories(ppgso PUBLIC
 #
 # TARGETS
 
-add_executable(skalican_krajkovic_project src/utilities/utils.cpp src/main.cpp src/scene_window.cpp src/scene.cpp src/staticObject.cpp src/camera.cpp  src/terrain_desert.cpp src/object.cpp src/outside_objects/skybox.cpp src/outside_objects/skybox.h src/outside_objects/building.h src/outside_objects/builidng.cpp src/outside_objects/tumbleweed.h src/outside_objects/tumbleweed.cpp src/outside_objects/doors/doors.h src/outside_objects/doors/doors.cpp src/outside_objects/doors/double_doors.h src/outside_objects/doors/double_doors.cpp src/animated_object.h src/animated_object.cpp)
+add_executable(skalican_krajkovic_project src/utilities/utils.cpp src/main.cpp src/scene_window.cpp src/scene.cpp src/staticObject.cpp src/camera.cpp  src/terrain_desert.cpp src/object.cpp src/outside_objects/skybox.cpp src/outside_objects/skybox.h src/outside_objects/building.h src/outside_objects/builidng.cpp src/outside_objects/tumbleweed.h src/outside_objects/tumbleweed.cpp src/outside_objects/doors/doors.h src/outside_objects/doors/doors.cpp src/outside_objects/doors/double_doors.h src/outside_objects/doors/double_doors.cpp src/animated_object.h src/animated_object.cpp src/interior_objects/human/human.cpp src/interior_objects/human/human.h src/interior_objects/human/arm.cpp src/interior_objects/human/arm.h)
 
 target_link_libraries(skalican_krajkovic_project ppgso shaders)
 install (TARGETS skalican_krajkovic_project DESTINATION .)
