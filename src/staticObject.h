@@ -19,9 +19,13 @@ private:
     static std::unique_ptr<ppgso::Mesh> mesh[num_obj];
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture[num_obj];
-    static char *texNames[num_obj];
+
+    static std::vector<std::array<glm::vec3,2>> bounding_boxes;
+    static std::string texNames[num_obj];
+    static std::string meshNames[num_obj];
+
+
     const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
-    static char *meshNames[num_obj];
 
 
 public:

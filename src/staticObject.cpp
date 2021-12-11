@@ -12,8 +12,13 @@
 std::unique_ptr<ppgso::Mesh> StaticObject::mesh[num_obj];
 std::unique_ptr<ppgso::Shader> StaticObject::shader;
 std::unique_ptr<ppgso::Texture> StaticObject::texture[num_obj];
-char *StaticObject::texNames[num_obj] = {"cactus.bmp", "cactus.bmp","stone.bmp","rock.bmp"};
-char *StaticObject::meshNames[num_obj] = {"cactus.obj","cactus_long.obj","stone.obj", "rock.obj"};
+std::string StaticObject::texNames[num_obj] = {"cactus.bmp", "cactus.bmp","stone.bmp","rock.bmp"};
+std::string StaticObject::meshNames[num_obj] = {"cactus.obj","cactus_long.obj","stone.obj", "rock.obj"};
+std::vector<std::array<glm::vec3,2>> StaticObject::bounding_boxes = {
+        {glm::vec3{0,0,-1}, glm::vec3{1,1,0}},
+        {glm::vec3{0,0,-1}, glm::vec3{1,2,0}},
+        {glm::vec3{-4.2, -4, -5.1}, glm::vec3{3.2, 3.1, 4}},
+        {glm::vec3{-1.7, 0, -2}, glm::vec3{2.5,1.5,2}} };
 const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
 
 StaticObject::StaticObject(int obj_id, glm::vec3 position_new, glm::vec3 rotation_new = {0,0,0}, glm::vec3 scale_new = {1,1,1}) {
@@ -26,8 +31,9 @@ StaticObject::StaticObject(int obj_id, glm::vec3 position_new, glm::vec3 rotatio
     rotation = rotation_new;
     scale = scale_new;
 
-
-
+    bounding_box[0] = bounding_boxes[obj_id][0]*scale;
+    bounding_box[1] = bounding_boxes[obj_id][1]*scale;
+    can_collide = true;
 }
 
 

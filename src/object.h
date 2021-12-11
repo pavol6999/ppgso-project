@@ -51,11 +51,14 @@ public:
   virtual void render(Scene &scene) = 0;
 
 
+
   // Object properties
   glm::vec3 position{0,0,0};
   glm::vec3 rotation{0,0,0};
   glm::vec3 scale{1,1,1};
   glm::mat4 modelMatrix{1};
+  bool can_collide = false;
+  std::array<glm::vec3,2> bounding_box;
 
 
 protected:
@@ -63,5 +66,7 @@ protected:
    * Generate modelMatrix from position, rotation and scale
    */
   void generateModelMatrix();
+
+  bool check_collision(glm::vec3 position, Scene &scene);
 };
 
