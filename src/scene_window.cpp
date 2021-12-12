@@ -2,6 +2,7 @@
 // Created by FIIT STU on 11/19/2021.
 //
 
+#include <src/Lighting/colorBulb.h>
 #include "scene_window.h"
 #include "src/outside_objects/skybox.h"
 #include "src/outside_objects/building.h"
@@ -48,7 +49,7 @@ void SceneWindow::generateTerrain(int TERRAIN_SIZE, int object_count) {
         else if (random == 3)
         {
 
-            scale = {2,2,2};
+            scale = {1,1,1};
         }
 
         auto object = std::make_unique<StaticObject>(random, pos, rotation, scale);
@@ -70,7 +71,16 @@ void SceneWindow::createOutdoorScene() {
     // Create a camera
 
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 250.0f);
+    auto sun = std::make_unique<Sun>(0,glm::vec3{0,100,50});
     scene.camera = move(camera);
+    //scene.lightSources.push_back(std::make_unique<Sun>(0, scene.camera->position));
+    scene.sun = move(sun);
+
+    scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {10,2,2},1));
+    scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {-10,2,2},2));
+
+
+
 
     // Add background
     scene.objects.push_back(std::make_unique<SkyBox>(glm::vec3{TERRAIN_SIZE,TERRAIN_SIZE,TERRAIN_SIZE}));
@@ -84,6 +94,14 @@ void SceneWindow::createOutdoorScene() {
     scene.objects.push_back(std::make_unique<SlotMachine>());
     scene.objects.push_back(std::make_unique<RouletteTable>(glm::vec3{0,0,2},glm::vec3{0,0,0}));
     scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
+    //scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {10,10,5},glm::vec3 {0,0,1},glm::vec3{1,1,1}));
+
+
+
+    for (int i = 0; i < 10; i++)
+        scene.objects.push_back(std::make_unique<Tumbleweed>());
+
+
     scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {0,0,15},glm::vec3 {0,0,1},glm::vec3{1,1,1}));
     scene.objects.push_back(std::make_unique<Human>(glm::vec3{0,1,0},glm::vec3{0,0,0}));
 }
