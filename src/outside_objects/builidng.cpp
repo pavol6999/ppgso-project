@@ -11,6 +11,7 @@
 #include <shaders/test_vert_glsl.h>
 #include <shaders/test_frag_glsl.h>
 #include <shaders/phongo_frag_glsl.h>
+#include <shaders/phongo_vert_glsl.h>
 
 #include "src/scene.h"
 #include "building.h"
@@ -21,7 +22,7 @@ Building::Building() {
                          {0.50754f,0.50754f,0.50754f},{0.508273f,0.508273f,0.508273f},0.4};
 
     // Initialize static resources if needed
-    if (!shader) shader = std::make_unique<ppgso::Shader>(test_vert_glsl, test_frag_glsl);
+    if (!shader) shader = std::make_unique<ppgso::Shader>(phongo_vert_glsl, phongo_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("casino.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("casino.obj");
 
@@ -37,8 +38,7 @@ bool Building::update(Scene &scene, float dt) {
 
 void Building::render(Scene &scene) {
 
-    // NOTE: this object does not use camera, just renders the entire quad as is
-    shader->setUniform("LightDirection", {0, 0, 0});
+
 
 
     // use camera
@@ -50,23 +50,34 @@ void Building::render(Scene &scene) {
     shader->setUniform("material.specular", material.specular);
     shader->setUniform("material.shininess", material.shininess);
 
-    shader->setUniform("light.ambient", {0.2f, 0.2f, 0.2f});
-    shader->setUniform("light.diffuse", {0.7f, 0.7f, 0.7f}); // darken diffuse light a bit
-    shader->setUniform("light.specular", {1.0f, 1.0f, 1.0f});
+    shader->setUniform("sun.position", scene.sun->position);
+    shader->setUniform("sun.ambient",scene.sun->ambient);
+    shader->setUniform("sun.specular",scene.sun->diffuse);
+    shader->setUniform("sun.diffuse",scene.sun->specular);
 
+    int lightCount = scene.lightSources.size();
+    int i = 0;
+    shader->setUniform("lightsCount",lightCount);
+    auto j = std::begin(scene.lightSources);
+    while (j != std::end(scene.lightSources)) {
 
-    shader->setUniform("light.constant",  1.0f);
-    shader->setUniform("light.linear",    0.09f);
-    shader->setUniform("light.quadratic", 0.032f);
+        std::string number = std::to_string(i);                                     ;
+        shader->setUniform("pointLights["+number+"].position",scene.lightSources[i]->position);
+        shader->setUniform("pointLights["+number+"].ambient",scene.lightSources[i]->ambient);
+        shader->setUniform("pointLights["+number+"].specular",scene.lightSources[i]->specular);
+        shader->setUniform("pointLights["+number+"].diffuse",scene.lightSources[i]->diffuse);
+        shader->setUniform("pointLights["+number+"].constant",scene.lightSources[i]->constant);
+        shader->setUniform("pointLights["+number+"].linear",scene.lightSources[i]->linear);
+        shader->setUniform("pointLights["+number+"].quadratic",scene.lightSources[i]->quadratic);
+        ++j;
+        ++i;
+    }
 
-    // render mesh
-    shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
-    shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
-    shader->setUniform("lightPos",  scene.camera->position);
     shader->setUniform("Transparency", 1.0f);
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
+    shader->setUniform("SceneAge", scene.age);
     shader->setUniform("CameraPosition", scene.camera->position);
 
     mesh->render();

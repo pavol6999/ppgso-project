@@ -23,7 +23,7 @@ void Camera::animate(float dt) {
 Camera::Camera(float fow, float ratio, float near, float far) {
     float fowInRad = (ppgso::PI/180.0f) * fow;
 
-    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,0,0},glm::vec3{5,5,5}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,0,0},glm::vec3{10,10,10}});
     key_frames.push_back({glm::vec3{0,15,25},glm::vec3{0,0,0}, glm::vec3{5,5,5}});
     key_frames.push_back({glm::vec3{0,2,10},glm::vec3{0,2,0}, glm::vec3{1,1,1}});
     key_frames.push_back({glm::vec3{0,2,5},glm::vec3{0,2,0}, glm::vec3{5,5,5}});
