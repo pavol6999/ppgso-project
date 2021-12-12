@@ -5,9 +5,6 @@
 
 void AnimatedObject::animate(float dt) {
     if (current_key == key_frames.size() - 1) {
-        position = key_frames[current_key].position;
-        rotation = key_frames[current_key].rotation;
-        scale = key_frames[current_key].scale;
         return;
     }
 

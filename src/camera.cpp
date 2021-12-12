@@ -4,8 +4,6 @@
 
 void Camera::animate(float dt) {
     if (current_key == key_frames.size() - 1) {
-        position = key_frames[current_key].position;
-        center = key_frames[current_key].center;
         return;
     }
 
@@ -23,8 +21,17 @@ void Camera::animate(float dt) {
 Camera::Camera(float fow, float ratio, float near, float far) {
     float fowInRad = (ppgso::PI/180.0f) * fow;
 
-    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,0,0},glm::vec3{5,5,5}});
-    key_frames.push_back({glm::vec3{0,15,25},glm::vec3{0,0,0}, glm::vec3{5,5,5}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{10,2,10}, glm::vec3{1,1,1}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{10,2,10}, glm::vec3{2,2,2}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{-10,2,10}, glm::vec3{1,1,1}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{-10,2,10}, glm::vec3{2,2,2}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,25,0},glm::vec3{5,5,5}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,25,0},glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{3,3,3}});
+
     key_frames.push_back({glm::vec3{0,2,10},glm::vec3{0,2,0}, glm::vec3{1,1,1}});
     key_frames.push_back({glm::vec3{0,2,5},glm::vec3{0,2,0}, glm::vec3{5,5,5}});
 
