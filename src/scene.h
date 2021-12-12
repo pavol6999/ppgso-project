@@ -26,6 +26,10 @@ public:
                                       glm::vec3( 0.0f, 0.0f,  0.0f),
                                       glm::vec3( 0.0f, 1.0f,  0.0f));
     glm::mat4 lightSpaceMatrix = lightProjection * lightView;
+
+    glm::vec3 wind = {0.1,0,0};
+    glm::vec3 gravity = {0,-0.1,0};
+
     float age = 0;
 /*!
      * Update all objects in the scene

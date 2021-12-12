@@ -18,6 +18,7 @@ SkyBox::SkyBox() {
                 {1.f,1.f,1.f},{0.f,0.f,0.f},0};
 
     scale = {200,200,200};
+    rotation = {3.14, 0 ,0};
 }
 
 SkyBox::SkyBox(glm::vec3 scale_new) {
@@ -29,13 +30,14 @@ SkyBox::SkyBox(glm::vec3 scale_new) {
                 {1.f,1.f,1.f},{0.f,0.f,0.f},0};
 
     scale = scale_new;
+    rotation = {2.5,0,0};
+
+    key_frames.push_back({{2,2,2}, {0,0,0}, {2.5, 0 ,0}});
+    key_frames.push_back({{1,1,1}, {0,0,0}, {0, 0 ,0}});
 }
 
 bool SkyBox::update(Scene &scene, float dt) {
-    if (scene.age <= 3){
-        rotation.x += 0.005;
-    }
-
+    if (scene.age >= 14) animate(dt);
     generateModelMatrix();
     return true;
 }

@@ -2,27 +2,28 @@
 // Created by Administrator on 07/12/2021.
 //
 
-#include <shaders/test_vert_glsl.h>
-#include <shaders/test_frag_glsl.h>
+#include <shaders/texture_vert_glsl.h>
+#include <shaders/texture_frag_glsl.h>
 #include <glm/gtx/euler_angles.hpp>
 
 #include "src/scene.h"
 #include "roulette_moving.h"
-#include <glm/gtx/string_cast.hpp>
-RouletteMoving::RouletteMoving(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc) {
+
+RouletteMoving::RouletteMoving(RouletteWheel &wheel) : wheel(wheel){
     // Initialize static resources if needed
-    if (!shader) shader = std::make_unique<ppgso::Shader>(test_vert_glsl, test_frag_glsl);
+    if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("roulette.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("moving.obj");
 
-    position = pos;
-    rotation = rot;
     scale = {0.25,0.25,0.25};
 }
 
 bool RouletteMoving::update(Scene &scene, float dt) {
     rotation.z += 0.1;
-    generateModelMatrix();
+    modelMatrix =
+            glm::translate(glm::mat4(1.0f), position + wheel.position + wheel.table.position)
+            * glm::orientate4(rotation + wheel.rotation + wheel.table.rotation)
+            * glm::scale(glm::mat4(1.0f), wheel.table.scale);
     return true;
 }
 
@@ -35,8 +36,6 @@ void RouletteMoving::render(Scene &scene) {
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
 
-
-
     // render mesh
     shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
     shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
@@ -48,7 +47,6 @@ void RouletteMoving::render(Scene &scene) {
     shader->setUniform("CameraPosition", scene.camera->position);
     mesh->render();
 }
-
 // shared resources
 std::unique_ptr<ppgso::Mesh> RouletteMoving::mesh;
 std::unique_ptr<ppgso::Shader> RouletteMoving::shader;

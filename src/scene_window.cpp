@@ -14,6 +14,7 @@
 #include "src/interior_objects/slot_machine/screen.h"
 #include "src/interior_objects/slot_machine/slot_machine.h"
 #include "src/interior_objects/roulette/roulette_table.h"
+#include "src/interior_objects/human/human.h"
 
 //void SceneWindow::createIndoorScene() {
     //auto indoorScene = std::make_shared<Scene>(*this);
@@ -87,6 +88,9 @@ void SceneWindow::createOutdoorScene() {
     scene.objects.push_back(std::make_unique<terrain_desert>());
     scene.objects.push_back(std::make_unique<Building>());
 
+    scene.objects.push_back(std::make_unique<StaticObject>(1, glm::vec3{0,0,10}, glm::vec3{0,0,0},glm::vec3 {1,1,1}));
+    scene.objects.push_back(std::make_unique<Tumbleweed>());
+
     scene.objects.push_back(std::make_unique<SlotMachine>());
     scene.objects.push_back(std::make_unique<RouletteTable>(glm::vec3{0,0,2},glm::vec3{0,0,0}));
     scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
@@ -98,6 +102,8 @@ void SceneWindow::createOutdoorScene() {
         scene.objects.push_back(std::make_unique<Tumbleweed>());
 
 
+    scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {0,0,15},glm::vec3 {0,0,1},glm::vec3{1,1,1}));
+    scene.objects.push_back(std::make_unique<Human>(glm::vec3{0,1,0},glm::vec3{0,0,0}));
 }
 
 
@@ -139,6 +145,7 @@ void SceneWindow::onIdle() {
     glClearColor(.5f, .5f, .5f, 0);
     // Clear depth and color buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
     // Update and render all objects
     scene.update(dt);

@@ -6,6 +6,9 @@
 #define PPGSO_ROULETTE_MOVING_H
 #include "src/object.h"
 #include <ppgso/ppgso.h>
+#include "roulette_wheel.h"
+
+class RouletteWheel;
 
 class RouletteMoving : public Object{
 private:
@@ -13,9 +16,10 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
 
+    RouletteWheel &wheel;
 public:
 
-    RouletteMoving(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc);
+    RouletteMoving(RouletteWheel &parent);
 
     bool update(Scene &scene, float dt) override;
 

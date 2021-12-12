@@ -18,16 +18,24 @@ Tumbleweed::Tumbleweed() {
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("tumble.obj");
 
     scale = {0.25, 0.25, 0.25};
-    position = {rand()%50 - 50, 0.5, rand()%10+10};
+    position = { -5, 0.5, 10};
 
-
+    bounding_box[0] = glm::vec3{-2.5,-2.5,-2.5}*scale;
+    bounding_box[1] = glm::vec3{2.5,2.5,2.5}*scale;
+    can_collide = true;
 }
 
 bool Tumbleweed::update(Scene &scene, float dt) {
-    position = position + wind;
-    rotation.y -= 0.05;
+    if (!check_collision(position + wind, scene)) {
+        position += wind;
+        rotation.y -= 0.1;
+    }
+    else {
+        rotation.y -= 0.005;
+    }
     generateModelMatrix();
     return true;
+
 }
 
 void Tumbleweed::render(Scene &scene) {
@@ -47,6 +55,8 @@ void Tumbleweed::render(Scene &scene) {
 
     mesh->render();
 }
+
+
 
 // shared resources
 std::unique_ptr<ppgso::Mesh> Tumbleweed::mesh;

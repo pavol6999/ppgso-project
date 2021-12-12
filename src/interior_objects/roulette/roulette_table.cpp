@@ -27,7 +27,7 @@ RouletteTable::RouletteTable(glm::vec3 pos, glm::vec3 rot) {
     position = pos;
     rotation = rot;
     scale = {0.25,0.25,0.25};
-    wheel = std::make_unique<RouletteWheel>(position, rotation, scale);
+    wheel = std::make_unique<RouletteWheel>(*this);
 }
 
 bool RouletteTable::update(Scene &scene, float dt) {
@@ -44,8 +44,6 @@ void RouletteTable::render(Scene &scene) {
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
-
-
 
     // render mesh
     shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});

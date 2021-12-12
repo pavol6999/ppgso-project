@@ -6,9 +6,9 @@
 #define PPGSO_SKYBOX_H
 
 #include <ppgso.h>
-#include "src/object.h"
+#include "src/animated_object.h"
 
-class SkyBox final : public Object {
+class SkyBox final : public AnimatedObject {
 private:
     static std::unique_ptr<ppgso::Mesh> mesh;
     static std::unique_ptr<ppgso::Shader> shader;
