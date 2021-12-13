@@ -29,6 +29,7 @@ Tumbleweed::Tumbleweed(glm::vec3 pos) {
 }
 
 bool Tumbleweed::update(Scene &scene, float dt) {
+
     if(static_cast<int>(scene.age)%5 < rand()%3)
         position += scene.wind2;
 
@@ -42,6 +43,7 @@ bool Tumbleweed::update(Scene &scene, float dt) {
     if (!check_collision(position + scene.gravity, scene)){
         position += scene.gravity;
     }
+
 
     generateModelMatrix();
     return true;
