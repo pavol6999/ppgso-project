@@ -22,6 +22,9 @@ terrain_desert::terrain_desert() {
 
     scale = {10,1,10};
     position = {0,0,0};
+    bounding_box[0] = glm::vec3{-22,0,-21}*scale;
+    bounding_box[1] = glm::vec3{22,0,21}*scale;
+    can_collide = true;
 }
 
 bool terrain_desert::update(Scene &scene, float dt) {

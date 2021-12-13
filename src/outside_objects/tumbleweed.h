@@ -14,7 +14,7 @@ private:
 
 public:
 
-    Tumbleweed();
+    Tumbleweed(glm::vec3 pos);
 
     bool update(Scene &scene, float dt) override;
 

@@ -111,8 +111,10 @@ void main()
 
     vec4 color = texture(Texture, vec2(TexCoords.x, 1.0 - TexCoords.y)+ TextureOffset) * vec4(result, 1.f);
 
-    if (SceneAge > 3)
-        FragColor = color + (fogColor - color) * min(dist / max((1500 - (SceneAge - 3)*120),150),1);
+    if (SceneAge > 5 && SceneAge < 25)
+        FragColor = color + (fogColor - color) * min(dist / max((1500 - (SceneAge - 5)*200),150),1);
+  //  if (SceneAge > 25)
+    //    FragColor = color + (fogColor - vec4(1.0,1.0,1.0,1.0)) * min(dist / (400 + (SceneAge - 25)*150),1);
     else
         FragColor = color + (fogColor - color) * min(dist / 1500 ,1);
 

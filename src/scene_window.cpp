@@ -30,30 +30,41 @@
 void SceneWindow::generateTerrain(int TERRAIN_SIZE, int object_count) {
     std::vector<glm::vec3> points = Utils::generatePoints(TERRAIN_SIZE, object_count, {0,0});
     glm::vec3 scale;
+
     glm::vec3 rotation;
     for(glm::vec3 pos : points)
     {
 
-        int random = (rand() % 4);
+        int random = (rand() % 5);
         if (random == 1 || random == 0) {
             scale = {3,3,3};
             rotation = {0,0,0};
+            auto object = std::make_unique<StaticObject>(random, pos, rotation, scale);
+            scene.objects.push_back(move(object));
         }
         else if(random == 2)
         {
             int rock_size = rand() % 3;
-           scale = {0.5,0.5,0.5};
-
-
+            scale = {0.5,0.5,0.5};
+            rotation = {(rand()%628)/100,(rand()%628)/100,(rand()%628)/100};
+            auto object = std::make_unique<StaticObject>(random, pos, rotation, scale);
+            scene.objects.push_back(move(object));
         }
         else if (random == 3)
         {
 
             scale = {1,1,1};
+            rotation = {0,0,0};
+            auto object = std::make_unique<StaticObject>(random, pos, rotation, scale);
+            scene.objects.push_back(move(object));
+        }
+        else if (random == 4)
+        {
+            auto object = std::make_unique<Tumbleweed>(pos);
+            scene.objects.push_back(move(object));
         }
 
-        auto object = std::make_unique<StaticObject>(random, pos, rotation, scale);
-        scene.objects.push_back(move(object));
+
     }
 
 
@@ -66,7 +77,7 @@ void SceneWindow::createOutdoorScene() {
 
     scene.objects.clear();
 
-    generateTerrain(TERRAIN_SIZE, 300);
+    generateTerrain(TERRAIN_SIZE, 420);
 
     // Create a camera
 
@@ -89,7 +100,7 @@ void SceneWindow::createOutdoorScene() {
     scene.objects.push_back(std::make_unique<Building>());
 
     scene.objects.push_back(std::make_unique<StaticObject>(1, glm::vec3{0,0,10}, glm::vec3{0,0,0},glm::vec3 {1,1,1}));
-    scene.objects.push_back(std::make_unique<Tumbleweed>());
+
 
     scene.objects.push_back(std::make_unique<SlotMachine>(glm::vec3{0.9,0,0},glm::vec3{0,0,1.6}));
     //scene.objects.push_back(std::make_unique<RouletteTable>(glm::vec3{0,0,2},glm::vec3{0,0,0}));
@@ -98,8 +109,8 @@ void SceneWindow::createOutdoorScene() {
 
 
 
-    for (int i = 0; i < 10; i++)
-        scene.objects.push_back(std::make_unique<Tumbleweed>());
+//    for (int i = 0; i < 40; i++)
+//        scene.objects.push_back(std::make_unique<Tumbleweed>(glm::vec3{-5,0,10}));
 
 
     scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {0,0,15},glm::vec3 {0,0,1},glm::vec3{1,1,1}));
@@ -125,6 +136,7 @@ SceneWindow::SceneWindow(const int width, const int height) : Window{"uz sme si 
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
 
+
     createOutdoorScene();
 }
 
@@ -140,14 +152,22 @@ void SceneWindow::onIdle() {
     time = (float) glfwGetTime();
     scene.age += dt;
 
+//    if (!switched_scene && scene.age > 10)
+//    {
+//        scene.objects.clear();
+//        scene.lightSources.clear();
+//
+//        scene.spotlights.clear();
+//        switched_scene = true;
+//        scene.objects.push_back(std::make_unique<Building>());
+//    }
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // Set gray background
 
-    glClearColor(.5f, .5f, .5f, 0);
-    // Clear depth and color buffers
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
-    // Update and render all objects
     scene.update(dt);
     scene.render();
+
+    // Update and render all objects
+
 }

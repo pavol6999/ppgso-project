@@ -19,5 +19,10 @@ ColorBulb::ColorBulb(glm::vec3 pos, int initial_color_index) {
 }
 
 bool ColorBulb::update(Scene &scene, float dt) {
+
+    int color = rand() % 4;
+    ambient = {colorLights[color].x * 0.1, colorLights[color].y * 0.1, colorLights[color].z * 0.1};
+    diffuse = {colorLights[color].x,  colorLights[color].y,  colorLights[color].z};
+    specular = {colorLights[color].x,  colorLights[color].y,  colorLights[color].z};
     return true;
 }

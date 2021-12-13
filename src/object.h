@@ -16,8 +16,6 @@ class Scene;
  *  Generally we also want to keep position, rotation and scale for each object to generate a modelMatrix
  */
 
-constexpr glm::vec3 wind = {0.1,0,0};
-
 
 class Object {
 
@@ -28,6 +26,8 @@ public:
             glm::vec3 specular;
             float shininess;
     };
+
+
     Material material;
   // Define default constructors as this is an abstract class
   Object() = default;

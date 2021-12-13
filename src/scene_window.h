@@ -15,10 +15,13 @@
 
 class SceneWindow : public ppgso::Window {
 private:
+    unsigned int depthMap;
+    const unsigned int SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
+    unsigned int depthMapFBO;
     Scene scene;
     // size_t activeScene = 0; // set the active scene
     //bool animate = true;
-
+    bool switched_scene = false;
     void createOutdoorScene();
     void generateTerrain(int TERRAIN_SIZE, int cactus_count);
 public:
