@@ -19,7 +19,7 @@ private:
 
 public:
 
-    SlotMachine();
+    SlotMachine(glm::vec3 pos, glm::vec3 rot);
 
     bool update(Scene &scene, float dt) override;
 

@@ -15,16 +15,16 @@
 #include "src/scene.h"
 #include "slot_machine.h"
 
-SlotMachine::SlotMachine() {
+SlotMachine::SlotMachine(glm::vec3 pos, glm::vec3 rot) {
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("automat.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("automat.obj");
 
-    position = {0,0,0};
-    rotation = {0,0,2.2};
+    position = pos;
+    rotation = rot;
 
-    screen = std::make_unique<Screen>(position + glm::vec3 {0,0,-0.01}, rotation, scale);
+    screen = std::make_unique<Screen>(position + glm::vec3 {0,0,0}, rotation, scale);
 }
 
 bool SlotMachine::update(Scene &scene, float dt) {

@@ -4,6 +4,8 @@
 
 void Camera::animate(float dt) {
     if (current_key == key_frames.size() - 1) {
+        position = key_frames[current_key].position;
+        center = key_frames[current_key].center;
         return;
     }
 

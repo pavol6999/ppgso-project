@@ -26,13 +26,7 @@ Tumbleweed::Tumbleweed() {
 }
 
 bool Tumbleweed::update(Scene &scene, float dt) {
-    if (!check_collision(position + wind, scene)) {
-        position += wind;
-        rotation.y -= 0.1;
-    }
-    else {
-        rotation.y -= 0.005;
-    }
+
     generateModelMatrix();
     return true;
 

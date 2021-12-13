@@ -12,12 +12,14 @@
 Arm::Arm(Human &human): human(human){
     // Initialize static resources if needed
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
-    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("roulette_Tex.bmp"));
+    if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("arm.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("arm.obj");
+
+    rotation.x = -1;
 }
 
 bool Arm::update(Scene &scene, float dt) {
-    rotation.x += 0.01;
+    rotation.x += sin(scene.age*3)/48;
     modelMatrix =
             glm::translate(glm::mat4(1.0f), position + human.position)
             * glm::orientate4(rotation + human.rotation)
@@ -38,7 +40,7 @@ void Arm::render(Scene &scene) {
     shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
     shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});
     shader->setUniform("lightPos",  scene.camera->position);
-    shader->setUniform("Transparency", 1);
+    shader->setUniform("Transparency", 1.f);
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
