@@ -37,7 +37,7 @@ bool Tumbleweed::update(Scene &scene, float dt) {
         rotation.y -= 0.1;
     }
     else {
-        rotation.y -= 0.005;
+        rotation.y -= 0.006;
     }
     if (!check_collision(position + scene.gravity, scene)){
         position += scene.gravity;
