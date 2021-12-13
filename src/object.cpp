@@ -21,7 +21,8 @@ bool Object::check_collision(glm::vec3 pos, Scene &scene){
         if (obj->can_collide) {
 
             auto collision = [](float one_s, float one_l, float two_s, float two_l) {
-                return (one_s >= two_s && one_s <= two_l) || (one_l >= two_s && one_l <= two_l);
+                return ((two_s <= one_s && one_s <= two_l) || (two_s <= one_l && one_l <= two_l)) ||
+                        ((one_s <= two_s && two_s <= one_l) || (one_s <= two_l && two_l <= one_l));
             };
 
             auto collisionX = collision(pos.x + this->bounding_box[0].x, pos.x + this->bounding_box[1].x,
