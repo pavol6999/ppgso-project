@@ -53,6 +53,7 @@ void Building::render(Scene &scene) {
     shader->setUniform("material.specular", material.specular);
     shader->setUniform("material.shininess", material.shininess);
 
+
     shader->setUniform("sun.position", scene.sun->position);
     shader->setUniform("sun.ambient",scene.sun->ambient);
     shader->setUniform("sun.specular",scene.sun->diffuse);
