@@ -19,6 +19,7 @@ private:
     static std::unique_ptr<ppgso::Texture> texture;
 
     Human &human;
+    float age = 0;
 public:
 
     Arm(Human &parent);

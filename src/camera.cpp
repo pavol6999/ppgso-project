@@ -4,8 +4,13 @@
 
 void Camera::animate(float dt) {
     if (current_key == key_frames.size() - 1) {
-        position = key_frames[current_key].position;
-        center = key_frames[current_key].center;
+        return;
+    }
+
+    if (key_frames[current_key].age >= key_frames[current_key].duration.x) {
+        key_frames[current_key + 1].position = position;
+        key_frames[current_key + 1].center = center;
+        current_key++;
         return;
     }
 
@@ -13,10 +18,6 @@ void Camera::animate(float dt) {
     center += (dt*(key_frames[current_key + 1].center - key_frames[current_key].center))/key_frames[current_key].duration;
 
     key_frames[current_key].age += dt;
-
-    if (key_frames[current_key].age >= key_frames[current_key].duration.x) {
-        current_key++;
-    }
 }
 
 
@@ -25,17 +26,19 @@ Camera::Camera(float fow, float ratio, float near, float far) {
 
     key_frames.push_back({glm::vec3{0,25,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
     key_frames.push_back({glm::vec3{0,2,50},glm::vec3{10,2,10}, glm::vec3{1,1,1}});
-    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{10,2,10}, glm::vec3{0.2,0.2,0.2}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{10,2,10}, glm::vec3{2,2,2}});
     key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
-//    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{-10,2,10}, glm::vec3{1,1,1}});
-//    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{-10,2,10}, glm::vec3{2,2,2}});
-//    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
-//    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,25,0},glm::vec3{5,5,5}});
-//    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,25,0},glm::vec3{3,3,3}});
-//    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{3,3,3}});
-//
-//    key_frames.push_back({glm::vec3{0,2,10},glm::vec3{0,2,0}, glm::vec3{1,1,1}});
-//    key_frames.push_back({glm::vec3{0,2,5},glm::vec3{0,2,0}, glm::vec3{5,5,5}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{-10,2,10}, glm::vec3{1,1,1}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{-10,2,10}, glm::vec3{2,2,2}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,25,0},glm::vec3{5,5,5}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,25,0},glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,10},glm::vec3{0,2,0}, glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,10},glm::vec3{0,2,0}, glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,5},glm::vec3{0,2,0}, glm::vec3{3,3,3}});
+
+
 
 
     projectionMatrix = glm::perspective(fowInRad, ratio, near, far);

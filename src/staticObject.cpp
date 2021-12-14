@@ -56,6 +56,7 @@ StaticObject::StaticObject(int obj_id, glm::vec3 position_new, glm::vec3 rotatio
 
 
 bool StaticObject::update(Scene &scene, float dt) {
+    if (scene.age > 23) return false;
     generateModelMatrix();
     return true;
 }
