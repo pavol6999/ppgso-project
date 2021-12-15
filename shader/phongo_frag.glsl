@@ -100,7 +100,7 @@ void main()
     vec3 result = vec3(0.0);
 
     //calculate sun light
-    if (SceneAge > 85)
+    if (SceneAge < 86)
         result += CalculateSunLight(sun, norm, FragPos, viewDir);
 
     // do the same for all point lights

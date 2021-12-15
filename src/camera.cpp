@@ -26,7 +26,6 @@ Camera::Camera(float fow, float ratio, float near, float far) {
     float fowInRad = (ppgso::PI/180.0f) * fow;
 
     key_frames.push_back({glm::vec3{0,25,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
-
     key_frames.push_back({glm::vec3{0,50,50},glm::vec3{0,2,0},glm::vec3{2,2,2}});
     key_frames.push_back({glm::vec3{0,50,60},glm::vec3{0,2,0},glm::vec3{5,5,5}});
     key_frames.push_back({glm::vec3{42,50,42},glm::vec3{-10,2,12},glm::vec3{4,4,4}});
@@ -40,7 +39,7 @@ Camera::Camera(float fow, float ratio, float near, float far) {
     key_frames.push_back({glm::vec3{0,30,50},glm::vec3{0,2,0}, glm::vec3{1,1,1}});
     key_frames.push_back({glm::vec3{0,30,50},glm::vec3{0,10,-30}, glm::vec3{1,1,1}}); //44 zaciatok skybox rotation
     key_frames.push_back({glm::vec3{0,30,50},glm::vec3{0,10,-30}, glm::vec3{8,8,8}}); // 52
-    key_frames.push_back({glm::vec3{0,30,50},glm::vec3{0,100,0},glm::vec3{4,4,4}}); // 56
+    key_frames.push_back({glm::vec3{0,30,50},glm::vec3{0,100,0},glm::vec3{3,3,3}}); // 56
     key_frames.push_back({glm::vec3{0,30,50},glm::vec3{0,100,0},glm::vec3{3,3,3}}); // 59
     key_frames.push_back({glm::vec3{0,30,50},glm::vec3{0,2,0},glm::vec3{2,2,2}}); // 61
     key_frames.push_back({glm::vec3{0,30,50},glm::vec3{0,2,0},glm::vec3{4,4,4}}); // 65

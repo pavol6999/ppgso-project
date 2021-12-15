@@ -12,6 +12,7 @@
 class ColorBulb final : public Light{
 
 public:
+    bool animate = true;
     float constant = 1.0f;
     float linear = 0.09f;
     float quadratic = 0.032f;
