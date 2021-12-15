@@ -27,7 +27,7 @@ Building::Building() {
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("casino.obj");
 
     position = {0,0,0};
-    scale = {3.1,3.1,3.1};
+    scale = {3,3,3};
 
     bounding_box[0] = {-3.*scale.x,0.*scale.y,-2.*scale.z};
     bounding_box[1] = {3.*scale.x,2.*scale.y,2.3*scale.z};

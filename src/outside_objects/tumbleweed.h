@@ -11,7 +11,7 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
 
-
+    glm::vec3 momentum{0,0,0};
 public:
 
     Tumbleweed(glm::vec3 pos);

@@ -10,10 +10,12 @@
 #include "src/Lighting/spotlight.h"
 #include "camera.h"
 #include "object.h"
+#include "src/interior_objects/confetti.h"
 #include "src/Lighting/Light.h"
 
 class Sun;
 class ColorBulb;
+class Confetti;
 /*
  * Scene is an object that will aggregate all scene related data
  * Objects are stored in a list of objects
@@ -23,9 +25,9 @@ class ColorBulb;
 
 class Scene {
 public:
-    const glm::vec3 wind2 = {0,0.03,0};
-    const glm::vec3 wind = {0.1,0,0};
-    const glm::vec3 gravity = {0,-0.01,0};
+    const glm::vec3 wind2 = {0,2,0};
+    const glm::vec3 wind = {5,0,0};
+    const glm::vec3 gravity = {0,-9,0};
     float age = 0;
 
 /*!

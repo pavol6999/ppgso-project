@@ -15,11 +15,11 @@ Arm::Arm(Human &human): human(human){
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("arm.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("arm.obj");
 
-    rotation.x = -0.7;
+    rotation.x = -0.4;
 }
 
 bool Arm::update(Scene &scene, float dt) {
-    rotation.x += sin(age*3)/50;
+    rotation.x += cos(age*3)/50;
     age += dt;
     modelMatrix =
             glm::translate(glm::mat4(1.0f), position + human.position)

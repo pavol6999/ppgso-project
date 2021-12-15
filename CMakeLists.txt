@@ -83,7 +83,7 @@ add_library(ppgso STATIC
         ppgso/image_raw.cpp
         ppgso/texture.cpp
         ppgso/window.cpp
-        src/interior_objects/slot_machine/slot_machine.h src/interior_objects/slot_machine/screen.h src/interior_objects/slot_machine/slot_machine.cpp src/interior_objects/slot_machine/screen.cpp src/interior_objects/roulette/roulette_table.h src/interior_objects/roulette/roulette_wheel.h src/interior_objects/roulette/roulette_moving.h src/interior_objects/roulette/roulette_table.cpp src/interior_objects/roulette/roulette_wheel.cpp src/interior_objects/roulette/roulette_moving.cpp)
+        src/interior_objects/slot_machine/slot_machine.h src/interior_objects/slot_machine/screen.h src/interior_objects/slot_machine/slot_machine.cpp src/interior_objects/slot_machine/screen.cpp src/interior_objects/roulette/roulette_table.h src/interior_objects/roulette/roulette_wheel.h src/interior_objects/roulette/roulette_moving.h src/interior_objects/roulette/roulette_table.cpp src/interior_objects/roulette/roulette_wheel.cpp src/interior_objects/roulette/roulette_moving.cpp src/interior_objects/confetti.cpp src/interior_objects/confetti.h)
 
 # Make sure GLM uses radians and GLEW is a static library
 target_compile_definitions(ppgso PUBLIC -DGLM_FORCE_RADIANS -DGLEW_STATIC)
