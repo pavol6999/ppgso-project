@@ -63,27 +63,25 @@ void Building::render(Scene &scene) {
     }
 
 
-
-
     int i = 0;
-    int lights_count = 0;
+    int lightsCount = 0;
     auto j = std::begin(scene.lightSources);
     while (j != std::end(scene.lightSources)) {
         if (scene.lightSources[i]->isActive) {
             std::string number = std::to_string(i);
-            shader->setUniform("pointLights[" + number + "].position", scene.lightSources[i]->position);
-            shader->setUniform("pointLights[" + number + "].ambient", scene.lightSources[i]->ambient);
-            shader->setUniform("pointLights[" + number + "].specular", scene.lightSources[i]->specular);
-            shader->setUniform("pointLights[" + number + "].diffuse", scene.lightSources[i]->diffuse);
-            shader->setUniform("pointLights[" + number + "].constant", scene.lightSources[i]->constant);
-            shader->setUniform("pointLights[" + number + "].linear", scene.lightSources[i]->linear);
-            shader->setUniform("pointLights[" + number + "].quadratic", scene.lightSources[i]->quadratic);
-            lights_count++;
+            shader->setUniform("pointLights["+number+"].position",scene.lightSources[i]->position);
+            shader->setUniform("pointLights["+number+"].ambient",scene.lightSources[i]->ambient);
+            shader->setUniform("pointLights["+number+"].specular",scene.lightSources[i]->specular);
+            shader->setUniform("pointLights["+number+"].diffuse",scene.lightSources[i]->diffuse);
+            shader->setUniform("pointLights["+number+"].constant",scene.lightSources[i]->constant);
+            shader->setUniform("pointLights["+number+"].linear",scene.lightSources[i]->linear);
+            shader->setUniform("pointLights["+number+"].quadratic",scene.lightSources[i]->quadratic);
+            lightsCount++;
         }
         ++j;
         ++i;
     }
-
+    shader->setUniform("lightsCount",lightsCount);
     int spotlightsCount = 0;
     int k = 0;
 
@@ -109,6 +107,7 @@ void Building::render(Scene &scene) {
         ++k;
     }
     shader->setUniform("spotlightsCount",spotlightsCount);
+
 
     shader->setUniform("Transparency", 1.0f);
     // render mesh

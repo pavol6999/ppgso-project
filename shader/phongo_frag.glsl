@@ -100,7 +100,7 @@ void main()
     vec3 result = vec3(0.0);
 
     //calculate sun light
-    if (SceneAge <= 85)
+    if (SceneAge > 85)
         result += CalculateSunLight(sun, norm, FragPos, viewDir);
 
     // do the same for all point lights
@@ -173,7 +173,7 @@ vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewD
     float dist = length(light.position - fragPos);
     float attenuation = 1.0 / (light.constant + light.linear * dist + light.quadratic * (dist * dist));
     // combine results
-    vec3 ambient = light.ambient * material.ambient;
+    vec3 ambient =  max(light.ambient * material.ambient,0.15);
     vec3 diffuse = light.diffuse * (diff * material.diffuse);
     vec3 specular = light.specular * (spec * material.specular);
     ambient *= attenuation;

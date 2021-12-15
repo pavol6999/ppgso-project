@@ -102,6 +102,7 @@ void SceneWindow::createScene() {
 
     scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {2,2,0},1, 88));
     scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {-2,1,0},2,88));
+    scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {2,2,10},3, 1));
 
 
     //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {0,20,-10},glm::vec3{0,2,0},1));

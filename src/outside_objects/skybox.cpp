@@ -124,7 +124,7 @@ void SkyBox::render(Scene &scene) {
         ++k;
     }
     shader->setUniform("spotlightsCount",spotlightsCount);
-
+    shader->setUniform("lightsCount",lights_count);
     shader->setUniform("Transparency", 1.0f);
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
