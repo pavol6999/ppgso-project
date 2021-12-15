@@ -12,7 +12,7 @@
 
 terrain_desert::terrain_desert() {
     material = {{0.19225f,0.19225f,0.19225f},
-                {0.50754f,0.50754f,0.50754f},{0.508273f,0.508273f,0.508273f},0.4};
+                {0.80754f,0.80754f,0.50754f},{0.508273f,0.508273f,0.508273f},12};
 
 
     // Initialize static resources if needed
@@ -36,18 +36,20 @@ void terrain_desert::render(Scene &scene) {
 
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
-
+    shader->setUniform("isTerrain",1);
     shader->setUniform("material.ambient", material.ambient);
     shader->setUniform("material.diffuse", material.diffuse);
     shader->setUniform("material.specular", material.specular);
     shader->setUniform("material.shininess", material.shininess);
 
 
-    shader->setUniform("sun.position", scene.sun->position);
-    shader->setUniform("sun.ambient",scene.sun->ambient);
-    shader->setUniform("sun.specular",scene.sun->diffuse);
-    shader->setUniform("sun.diffuse",scene.sun->specular);
-
+    if (scene.sun)
+    {
+        shader->setUniform("sun.position", scene.sun->position);
+        shader->setUniform("sun.ambient",scene.sun->ambient);
+        shader->setUniform("sun.specular",scene.sun->diffuse);
+        shader->setUniform("sun.diffuse",scene.sun->specular);
+    }
     int lightCount = scene.lightSources.size();
     int i = 0;
     shader->setUniform("lightsCount",lightCount);
@@ -66,6 +68,29 @@ void terrain_desert::render(Scene &scene) {
         ++i;
     }
 
+    int spotlightsCount = scene.spotlights.size();
+    int k = 0;
+    shader->setUniform("spotlightsCount",spotlightsCount);
+    auto l = std::begin(scene.spotlights);
+    while (l != std::end(scene.spotlights)) {
+
+        std::string number = std::to_string(k);
+
+        shader->setUniform("spotLights["+number+"].position",scene.spotlights[k]->position);
+
+        shader->setUniform("spotLights["+number+"].ambient",scene.spotlights[k]->ambient);
+        shader->setUniform("spotLights["+number+"].specular",scene.spotlights[k]->specular);
+        shader->setUniform("spotLights["+number+"].diffuse",scene.spotlights[k]->diffuse);
+        shader->setUniform("spotLights["+number+"].constant",scene.spotlights[k]->constant);
+        shader->setUniform("spotLights["+number+"].linear",scene.spotlights[k]->linear);
+        shader->setUniform("spotLights["+number+"].outerCutOff",glm::cos(glm::radians(30.0f)));
+        shader->setUniform("spotLights["+number+"].cutOff",glm::cos(glm::radians(25.f)));
+//        shader->setUniform("spotLights["+number+"].direction",scene.spotlights[k]->direction);
+        shader->setUniform("spotLights["+number+"].direction",scene.spotlights[k]->center);
+        shader->setUniform("spotLights["+number+"].quadratic",scene.spotlights[k]->quadratic);
+        ++l;
+        ++k;
+    }
     shader->setUniform("Transparency", 1.0f);
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);

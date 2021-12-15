@@ -97,10 +97,19 @@ void SceneWindow::createScene() {
     //scene.lightSources.push_back(std::make_unique<Sun>(0, scene.camera->position));
     scene.sun = move(sun);
 
+
     generateTerrain(TERRAIN_SIZE, 420);
 
     scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {10,2,2},1));
     scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {-10,2,2},2));
+
+
+    //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {0,20,-10},glm::vec3{0,2,0},1));
+    scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {-20,15,30},glm::vec3{-3,2,2},0));
+    //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {20,15,30},glm::vec3{3,2,2},2));
+
+
+
 
     scene.objects.push_back(std::make_unique<SkyBox>(glm::vec3{TERRAIN_SIZE,TERRAIN_SIZE,TERRAIN_SIZE}));
 
