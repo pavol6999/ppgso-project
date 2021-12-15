@@ -5,14 +5,17 @@
 #include "spotlight.h"
 #include <glm/glm.hpp>
 bool Spotlight::update(Scene &scene, float dt) {
+    if (scene.age >= turnOn && scene.age <= 85 )
+    {
+        isActive = true;
+    }
+    if (scene.age >= 85)
+        return false;
 
-    //center.x = center.x + (position.x-center.x)*cos(dt) - (position.z-center.z)*sin(dt);
-
-    //center.z = center.z + (position.x-center.x)*sin(dt) + (position.z-center.z)*cos(dt);
     return true;
 }
 
-Spotlight::Spotlight(glm::vec3 pos, glm::vec3 dir, int initial_color_index) {
+Spotlight::Spotlight(glm::vec3 pos, glm::vec3 dir, int initial_color_index, float turn_on_time ) {
     colorLights = {
             glm::vec3(0.f, 1.f, 0.f),
             glm::vec3(1.0f, 0.0f, 0.0f),
@@ -25,6 +28,7 @@ Spotlight::Spotlight(glm::vec3 pos, glm::vec3 dir, int initial_color_index) {
     specular = {colorLights[initial_color_index].x,  colorLights[initial_color_index].y,  colorLights[initial_color_index].z};
     center = dir - pos;
     initial_center = dir - pos;
+    turnOn=turn_on_time;
 
 
 

@@ -50,47 +50,50 @@ void terrain_desert::render(Scene &scene) {
         shader->setUniform("sun.specular",scene.sun->diffuse);
         shader->setUniform("sun.diffuse",scene.sun->specular);
     }
-    int lightCount = scene.lightSources.size();
     int i = 0;
-    shader->setUniform("lightsCount",lightCount);
+    int lights_count = 0;
     auto j = std::begin(scene.lightSources);
     while (j != std::end(scene.lightSources)) {
-
-        std::string number = std::to_string(i);                                     ;
-        shader->setUniform("pointLights["+number+"].position",scene.lightSources[i]->position);
-        shader->setUniform("pointLights["+number+"].ambient",scene.lightSources[i]->ambient);
-        shader->setUniform("pointLights["+number+"].specular",scene.lightSources[i]->specular);
-        shader->setUniform("pointLights["+number+"].diffuse",scene.lightSources[i]->diffuse);
-        shader->setUniform("pointLights["+number+"].constant",scene.lightSources[i]->constant);
-        shader->setUniform("pointLights["+number+"].linear",scene.lightSources[i]->linear);
-        shader->setUniform("pointLights["+number+"].quadratic",scene.lightSources[i]->quadratic);
+        if (scene.lightSources[i]->isActive) {
+            std::string number = std::to_string(i);
+            shader->setUniform("pointLights[" + number + "].position", scene.lightSources[i]->position);
+            shader->setUniform("pointLights[" + number + "].ambient", scene.lightSources[i]->ambient);
+            shader->setUniform("pointLights[" + number + "].specular", scene.lightSources[i]->specular);
+            shader->setUniform("pointLights[" + number + "].diffuse", scene.lightSources[i]->diffuse);
+            shader->setUniform("pointLights[" + number + "].constant", scene.lightSources[i]->constant);
+            shader->setUniform("pointLights[" + number + "].linear", scene.lightSources[i]->linear);
+            shader->setUniform("pointLights[" + number + "].quadratic", scene.lightSources[i]->quadratic);
+            lights_count++;
+        }
         ++j;
         ++i;
     }
 
-    int spotlightsCount = scene.spotlights.size();
+    int spotlightsCount = 0;
     int k = 0;
-    shader->setUniform("spotlightsCount",spotlightsCount);
+
     auto l = std::begin(scene.spotlights);
     while (l != std::end(scene.spotlights)) {
+        if (scene.spotlights[k]->isActive) {
+            std::string number = std::to_string(k);
 
-        std::string number = std::to_string(k);
+            shader->setUniform("spotLights["+number+"].position",scene.spotlights[k]->position);
 
-        shader->setUniform("spotLights["+number+"].position",scene.spotlights[k]->position);
-
-        shader->setUniform("spotLights["+number+"].ambient",scene.spotlights[k]->ambient);
-        shader->setUniform("spotLights["+number+"].specular",scene.spotlights[k]->specular);
-        shader->setUniform("spotLights["+number+"].diffuse",scene.spotlights[k]->diffuse);
-        shader->setUniform("spotLights["+number+"].constant",scene.spotlights[k]->constant);
-        shader->setUniform("spotLights["+number+"].linear",scene.spotlights[k]->linear);
-        shader->setUniform("spotLights["+number+"].outerCutOff",glm::cos(glm::radians(30.0f)));
-        shader->setUniform("spotLights["+number+"].cutOff",glm::cos(glm::radians(25.f)));
-//        shader->setUniform("spotLights["+number+"].direction",scene.spotlights[k]->direction);
-        shader->setUniform("spotLights["+number+"].direction",scene.spotlights[k]->center);
-        shader->setUniform("spotLights["+number+"].quadratic",scene.spotlights[k]->quadratic);
+            shader->setUniform("spotLights["+number+"].ambient",scene.spotlights[k]->ambient);
+            shader->setUniform("spotLights["+number+"].specular",scene.spotlights[k]->specular);
+            shader->setUniform("spotLights["+number+"].diffuse",scene.spotlights[k]->diffuse);
+            shader->setUniform("spotLights["+number+"].constant",scene.spotlights[k]->constant);
+            shader->setUniform("spotLights["+number+"].linear",scene.spotlights[k]->linear);
+            shader->setUniform("spotLights["+number+"].outerCutOff",scene.spotlights[k]->outerCutOff);
+            shader->setUniform("spotLights["+number+"].cutOff",scene.spotlights[k]->cutOff);
+            shader->setUniform("spotLights["+number+"].direction",scene.spotlights[k]->center);
+            shader->setUniform("spotLights["+number+"].quadratic",scene.spotlights[k]->quadratic);
+            spotlightsCount++;
+        }
         ++l;
         ++k;
     }
+    shader->setUniform("spotlightsCount",spotlightsCount);
     shader->setUniform("Transparency", 1.0f);
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);

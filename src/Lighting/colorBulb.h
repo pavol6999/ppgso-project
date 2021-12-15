@@ -5,9 +5,10 @@
 #ifndef PPGSO_COLORBULB_H
 #define PPGSO_COLORBULB_H
 
-#include "src/scene.h"
-#include "src/Lighting/Light.h"
 
+#include <array>
+#include "src/Lighting/Light.h"
+#include "src/scene.h"
 class ColorBulb : public Light{
 
 public:
@@ -15,7 +16,7 @@ public:
     float linear = 0.09f;
     float quadratic = 0.032f;
     std::array<glm::vec3,4> colorLights;
-    ColorBulb(glm::vec3 position, int initial_color_index);
+    ColorBulb(glm::vec3 position, int initial_color_index, float turn_on_time);
     bool update(Scene &scene, float dt) override;
 };
 

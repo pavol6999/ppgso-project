@@ -16,6 +16,7 @@
 class Sun;
 class ColorBulb;
 class Confetti;
+class Spotlight;
 /*
  * Scene is an object that will aggregate all scene related data
  * Objects are stored in a list of objects

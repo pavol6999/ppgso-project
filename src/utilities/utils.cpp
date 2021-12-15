@@ -11,6 +11,7 @@
 #include <ppgso.h>
 
 
+
 // generate random uniform points inside 2D circle
 std::vector<glm::vec3> Utils::generatePoints(int radius, int n, glm::vec2 center) {
     std::vector<glm::vec3> points;

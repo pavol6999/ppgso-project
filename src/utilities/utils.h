@@ -15,6 +15,7 @@ class Utils {
     static double uniform();
 
 public:
+
     static std::vector<glm::vec3> generatePoints(int radius, int n, glm::vec2 center);
 };
 

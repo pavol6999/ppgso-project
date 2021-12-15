@@ -7,7 +7,7 @@
 
 
 #include <array>
-
+#include "src/scene.h"
 #include "Light.h"
 #include <glm/glm.hpp>
 
@@ -20,10 +20,11 @@ public:
     float quadratic = 0.20f;
     glm::vec3 position;
     glm::vec3 center;
+
     glm::vec3 initial_center;
-    float cutOff = glm::cos(glm::radians(7.f));
-    float outerCutOff = glm::cos(glm::radians(10.0f));
-    Spotlight(glm::vec3 position,glm::vec3 direction, int initial_color_index);
+    float cutOff = glm::cos(glm::radians(25.f));
+    float outerCutOff = glm::cos(glm::radians(30.0f));
+    Spotlight(glm::vec3 position,glm::vec3 direction, int initial_color_index, float turn_on_time);
     bool update(Scene &scene, float dt) override;
 };
 

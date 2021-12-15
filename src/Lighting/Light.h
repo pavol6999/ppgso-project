@@ -19,7 +19,8 @@ public:
     glm::vec3 ambient;
     glm::vec3 specular;
     glm::vec3 position;
-    bool isActive;
+    bool isActive = false;
+    float turnOn = -1.f;
     Light() = default;
     Light(const Light&) = default;
     Light(Light&&) = default;

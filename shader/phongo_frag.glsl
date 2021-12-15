@@ -100,8 +100,8 @@ void main()
     vec3 result = vec3(0.0);
 
     //calculate sun light
-
-    result += CalculateSunLight(sun, norm, FragPos, viewDir);
+    if (SceneAge <= 85)
+        result += CalculateSunLight(sun, norm, FragPos, viewDir);
 
     // do the same for all point lights
     for(int i = 0; i < lightsCount; i++)
@@ -135,7 +135,7 @@ void main()
     if (SceneAge > 13 && SceneAge <40)
         FragColor = color + (fogColor - color) * min(dist / max((1500 - (SceneAge - 13)*100),150),1);
     else if (SceneAge>40)
-         FragColor = color + (fogColor - color) * min(dist / (150 + (SceneAge - 40)*25),1);
+         FragColor = color + (fogColor - color) * min(dist / (150 + (SceneAge - 40)*75),1);
     else
             FragColor = color + (fogColor - color) * min(dist / 1500 ,1);
 

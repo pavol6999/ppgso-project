@@ -90,7 +90,7 @@ void SceneWindow::createScene() {
 
 
 
-    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 250.0f);
+    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 400.0f);
     auto sun = std::make_unique<Sun>(0,glm::vec3{0,100,50});
     scene.camera = move(camera);
 
@@ -100,12 +100,13 @@ void SceneWindow::createScene() {
 
     generateTerrain(TERRAIN_SIZE, 420);
 
-    scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {10,2,2},1));
-    scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {-10,2,2},2));
+    scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {2,2,0},1, 88));
+    scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {-2,1,0},2,88));
 
 
     //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {0,20,-10},glm::vec3{0,2,0},1));
-    scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {-20,15,30},glm::vec3{-3,2,2},0));
+    scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {-20,15,30},glm::vec3{-3,2,2},1,60));
+    scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {20,15,30},glm::vec3{3,2,2},2,62));
     //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {20,15,30},glm::vec3{3,2,2},2));
 
 
@@ -160,7 +161,7 @@ void SceneWindow::onIdle() {
     scene.age += dt;
 
     if (scene.age > 1) {
-        drop_confetti();
+        //drop_confetti();
     }
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);

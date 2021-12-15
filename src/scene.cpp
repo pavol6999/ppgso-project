@@ -3,14 +3,7 @@
 void Scene::update(float time) {
     camera->update(time);
 
-
-    if(!sun->update(*this,time))
-    {
-        auto ptr = sun.release();
-        ptr = nullptr;
-        delete ptr;
-
-    }
+    sun->update(*this,time);
 
     auto i = std::begin(objects);
     while (i != std::end(objects)) {

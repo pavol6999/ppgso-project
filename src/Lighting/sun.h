@@ -8,7 +8,7 @@
 #include "src/scene.h"
 #include "src/Lighting/Light.h"
 
-class Sun final : public Light{
+class Sun final : public Light {
 
 public:
     std::array<glm::vec3,4> colorLights;
