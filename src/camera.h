@@ -17,9 +17,9 @@ public:
     glm::vec3 center{0.,0.,0.};
 
     struct key_frame {
-        const glm::vec3 position;
-        const glm::vec3 center;
-        glm::vec3 duration;
+        glm::vec3 position;
+        glm::vec3 center;
+        const glm::vec3 duration;
         float age = 0;
     };
 

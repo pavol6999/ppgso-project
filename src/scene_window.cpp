@@ -16,17 +16,6 @@
 #include "src/interior_objects/roulette/roulette_table.h"
 #include "src/interior_objects/human/human.h"
 
-//void SceneWindow::createIndoorScene() {
-    //auto indoorScene = std::make_shared<Scene>(*this);
-   //scenes.push_back(indoorScene);
-
-   //scene.objects.clear();
-
-    // Create a camera
-//    auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
-//    camera->position.z = -15.0f;
-//    scene.camera = move(camera);
-
 void SceneWindow::generateTerrain(int TERRAIN_SIZE, int object_count) {
     std::vector<glm::vec3> points = Utils::generatePoints(TERRAIN_SIZE, object_count, {0,0});
     glm::vec3 scale;
@@ -73,13 +62,9 @@ void SceneWindow::generateTerrain(int TERRAIN_SIZE, int object_count) {
 void SceneWindow::createOutdoorScene() {
     const int TERRAIN_SIZE = 200;
 
-
-
     scene.objects.clear();
 
     generateTerrain(TERRAIN_SIZE, 420);
-
-    // Create a camera
 
     auto camera = std::make_unique<Camera>(60.0f, 1.0f, 0.1f, 250.0f);
     auto sun = std::make_unique<Sun>(0,glm::vec3{0,100,50});
@@ -90,6 +75,7 @@ void SceneWindow::createOutdoorScene() {
     //scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {10,2,2},1));
     //scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {-2,10,-30},2));
 
+
     //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {0,20,-10},glm::vec3{0,2,0},1));
     scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {-20,15,30},glm::vec3{-3,2,2},0));
     //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {20,15,30},glm::vec3{3,2,2},2));
@@ -97,6 +83,7 @@ void SceneWindow::createOutdoorScene() {
 
 
     // Add background
+
     scene.objects.push_back(std::make_unique<SkyBox>(glm::vec3{TERRAIN_SIZE,TERRAIN_SIZE,TERRAIN_SIZE}));
 
     scene.objects.push_back(std::make_unique<terrain_desert>());
@@ -106,15 +93,8 @@ void SceneWindow::createOutdoorScene() {
 
 
     scene.objects.push_back(std::make_unique<SlotMachine>(glm::vec3{0.9,0,0},glm::vec3{0,0,1.6}));
-    //scene.objects.push_back(std::make_unique<RouletteTable>(glm::vec3{0,0,2},glm::vec3{0,0,0}));
+
     scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
-    //scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {10,10,5},glm::vec3 {0,0,1},glm::vec3{1,1,1}));
-
-
-
-//    for (int i = 0; i < 40; i++)
-//        scene.objects.push_back(std::make_unique<Tumbleweed>(glm::vec3{-5,0,10}));
-
 
     scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {0,0,15},glm::vec3 {0,0,1},glm::vec3{1,1,1}));
     scene.objects.push_back(std::make_unique<Human>(glm::vec3{0,1.65,0},glm::vec3{0,0,1.6}));
@@ -155,15 +135,6 @@ void SceneWindow::onIdle() {
     time = (float) glfwGetTime();
     scene.age += dt;
 
-//    if (!switched_scene && scene.age > 10)
-//    {
-//        scene.objects.clear();
-//        scene.lightSources.clear();
-//
-//        scene.spotlights.clear();
-//        switched_scene = true;
-//        scene.objects.push_back(std::make_unique<Building>());
-//    }
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     // Set gray background

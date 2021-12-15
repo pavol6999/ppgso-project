@@ -23,7 +23,6 @@ class ColorBulb;
 
 class Scene {
 public:
-
     const glm::vec3 wind2 = {0,0.03,0};
     const glm::vec3 wind = {0.1,0,0};
     const glm::vec3 gravity = {0,-0.01,0};
