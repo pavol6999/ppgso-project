@@ -13,7 +13,7 @@ Screen::Screen(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc) {
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("screentex.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("screen.obj");
-    textureOffset = {0,0};
+    textureOffset = {0,rand()};
     position = pos;
     rotation = rot;
     scale = sc;

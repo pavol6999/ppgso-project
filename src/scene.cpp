@@ -41,5 +41,4 @@ void Scene::render() {
     for (auto &obj : objects) {
         obj->render(*this);
     }
-
 }

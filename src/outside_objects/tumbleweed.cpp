@@ -18,32 +18,39 @@ Tumbleweed::Tumbleweed(glm::vec3 pos) {
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("tumble.obj");
 
     scale = {0.25, 0.25, 0.25};
-//  position = { -20, 0.5, 10};
     position = pos;
     position.y += 0.5;
+
     material = {{0.05f,0.05f,0.05f},
                 {0.4f,0.5f,0.4f},{0.7f,0.7f,0.7f},48};
+
     bounding_box[0] = glm::vec3{-2.5,-2.5,-2.5}*scale;
     bounding_box[1] = glm::vec3{2.5,2.5,2.5}*scale;
+
     can_collide = true;
 }
 
 bool Tumbleweed::update(Scene &scene, float dt) {
 
     if(static_cast<int>(scene.age)%5 < rand()%3)
-        position += scene.wind2;
+        position += scene.wind2*dt;
 
     if (!check_collision(position + scene.wind, scene)) {
-        position += scene.wind;
+        position += scene.wind*dt ;
         rotation.y -= 0.1;
     }
     else {
         rotation.y -= 0.006;
     }
-    if (!check_collision(position + scene.gravity, scene)){
-        position += scene.gravity;
+    if (!check_collision(position + scene.gravity, scene)) {
+        //s(t) = a*t*t*0.5f + v0*t + s0
+        position += momentum*dt + scene.gravity*dt*dt*0.5f;
+        //v = v0 + v*t
+        momentum += scene.gravity*dt;
     }
-
+    else {
+        momentum.y = 0;
+    }
 
     generateModelMatrix();
     return true;

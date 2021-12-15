@@ -20,7 +20,9 @@ private:
     unsigned int depthMapFBO;
     Scene scene;
 
-    void createOutdoorScene();
+    void createScene();
+    void generateInterior();
+    void drop_confetti();
     void generateTerrain(int TERRAIN_SIZE, int cactus_count);
 public:
 
