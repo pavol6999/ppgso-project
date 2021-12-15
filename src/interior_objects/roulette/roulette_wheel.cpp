@@ -35,7 +35,7 @@ void RouletteWheel::render(Scene &scene) {
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
-
+    shader->setUniform("isTerrain",0);
     // render mesh
     shader->setUniform("objectColor", {0.3f, 0.6f, 0.f});
     shader->setUniform("lightColor",  {1.0f, 1.0f, 1.0f});

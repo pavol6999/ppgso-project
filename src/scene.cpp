@@ -2,7 +2,16 @@
 
 void Scene::update(float time) {
     camera->update(time);
-    sun->update(*this,time);
+
+
+    if(!sun->update(*this,time))
+    {
+        auto ptr = sun.release();
+        ptr = nullptr;
+        delete ptr;
+
+    }
+
     auto i = std::begin(objects);
     while (i != std::end(objects)) {
         // Update and remove from list if needed

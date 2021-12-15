@@ -31,7 +31,7 @@ void RouletteMoving::render(Scene &scene) {
     // NOTE: this object does not use camera, just renders the entire quad as is
     shader->setUniform("LightDirection", {0, 0, 0});
 
-
+    shader->setUniform("isTerrain",0);
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);

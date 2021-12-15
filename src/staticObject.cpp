@@ -90,12 +90,14 @@ void StaticObject::render(Scene &scene) {
     shader->setUniform("material.diffuse", material.diffuse);
     shader->setUniform("material.specular", material.specular);
     shader->setUniform("material.shininess", material.shininess);
-
-    shader->setUniform("sun.position", scene.sun->position);
-    shader->setUniform("sun.ambient",scene.sun->ambient);
-    shader->setUniform("sun.specular",scene.sun->diffuse);
-    shader->setUniform("sun.diffuse",scene.sun->specular);
-
+    shader->setUniform("isTerrain",0);
+    if (scene.sun)
+    {
+        shader->setUniform("sun.position", scene.sun->position);
+        shader->setUniform("sun.ambient",scene.sun->ambient);
+        shader->setUniform("sun.specular",scene.sun->diffuse);
+        shader->setUniform("sun.diffuse",scene.sun->specular);
+    }
     int lightCount = scene.lightSources.size();
     int i = 0;
     shader->setUniform("lightsCount",lightCount);

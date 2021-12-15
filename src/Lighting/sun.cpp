@@ -6,8 +6,9 @@
 
 bool Sun::update(Scene &scene, float dt) {
 
-    if (scene.age > 5)
+    if (scene.age > 4.9)
     {
+        return false;
         ambient = {colorLights[3].x * 0.1, colorLights[3].y * 0.1, colorLights[3].z * 0.1};
         diffuse = {colorLights[3].x,  colorLights[3].y,  colorLights[3].z};
         specular = {colorLights[3].x,  colorLights[3].y,  colorLights[3].z};

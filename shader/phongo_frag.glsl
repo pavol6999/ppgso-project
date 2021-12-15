@@ -70,7 +70,7 @@ uniform vec2 TextureOffset;
 uniform float SceneAge;
 uniform float Transparency;
 uniform sampler2D Texture;
-
+uniform int isTerrain = 0;
 
 uniform vec3 CameraPosition;
 
@@ -78,10 +78,16 @@ uniform vec3 CameraPosition;
 
 //define function prototypes
 
-vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
-vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
-vec3 CalcDirLight(DirectionalLight light, vec3 normal, vec3 viewDir);
-vec3 CalcSunLight(SunLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
+vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
+vec3 CalculateSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
+vec3 CalculateSunLight(SunLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
+
+float[25] kernel = float[] (
+            1.0,  4.0,  6.0,  4.0, 1.0,
+            4.0, 16.0, 24.0, 16.0, 4.0,
+            6.0, 24.0, 36.0, 24.0, 6.0,
+            4.0, 16.0, 24.0, 16.0, 4.0,
+            1.0,  4.0,  6.0,  4.0, 1.0);
 
 void main()
 {
@@ -94,41 +100,58 @@ void main()
     vec3 result = vec3(0.0);
 
     //calculate sun light
-    result += CalcSunLight(sun, norm, FragPos, viewDir);
+
+    result += CalculateSunLight(sun, norm, FragPos, viewDir);
 
     // do the same for all point lights
     for(int i = 0; i < lightsCount; i++)
-        result += CalcPointLight(pointLights[i], norm, FragPos, viewDir);
-    // calculate spotlights in loop
+        result += CalculatePointLight(pointLights[i], norm, FragPos, viewDir);
 
 
 
     for(int j = 0; j < spotlightsCount; j++)
-            result += CalcSpotLight(spotLights[j], norm, FragPos, viewDir);
+            result += CalculateSpotLight(spotLights[j], norm, FragPos, viewDir);
 
     //define fog color
     vec4 fogColor = vec4(190/255.0,196/255.0,147/255.0,1);
 
-    vec4 color = texture(Texture, vec2(TexCoords.x, 1.0 - TexCoords.y)+ TextureOffset) * vec4(result, 1.f);
 
-    if (SceneAge > 5 && SceneAge < 25)
-        FragColor = color + (fogColor - color) * min(dist / max((1500 - (SceneAge - 5)*200),150),1);
-  //  if (SceneAge > 25)
-    //    FragColor = color + (fogColor - vec4(1.0,1.0,1.0,1.0)) * min(dist / (400 + (SceneAge - 25)*150),1);
+
+    float factor = 256.0;
+    int index = 0;
+    vec4 color = vec4(1);
+    if(isTerrain == 1) {
+    for (int i = -2; i <= 2; i++) {
+            for (int j = -2; j <= 2; j++) {
+              vec2 shift = vec2(i,j) / textureSize(Texture,0);
+              color += kernel[index++] * texture(Texture, vec2(TexCoords.x, 1.0 - TexCoords.y) + shift) ;
+            }
+    }
+    color = color / factor * vec4(result,1);
+    }
     else
-        FragColor = color + (fogColor - color) * min(dist / 1500 ,1);
+        color = texture(Texture, vec2(TexCoords.x, 1.0 - TexCoords.y)+ TextureOffset) * vec4(result,1);
+
+    if (SceneAge > 13 && SceneAge <40)
+        FragColor = color + (fogColor - color) * min(dist / max((1500 - (SceneAge - 13)*100),150),1);
+    else if (SceneAge>40)
+         FragColor = color + (fogColor - color) * min(dist / (150 + (SceneAge - 40)*25),1);
+    else
+            FragColor = color + (fogColor - color) * min(dist / 1500 ,1);
+
+
 
 
     FragColor.a = Transparency;
 }
 
-vec3 CalcSunLight(SunLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
+vec3 CalculateSunLight(SunLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
-    vec3 lightDir = normalize(light.position - fragPos);
+    vec3 lightDirection = normalize(light.position - fragPos);
     // diffuse shading
-    float diff = max(dot(normal, lightDir), 0.0);
+    float diff = max(dot(normal, lightDirection), 0.0);
     // specular shading
-    vec3 reflectDir = reflect(-lightDir, normal);
+    vec3 reflectDir = reflect(-lightDirection, normal);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     vec3 ambient = max(light.ambient * material.ambient,0.15);
     vec3 diffuse = light.diffuse * (diff * material.diffuse);
@@ -137,33 +160,18 @@ vec3 CalcSunLight(SunLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 }
 
 
-vec3 CalcDirLight(DirectionalLight light, vec3 normal, vec3 viewDir)
-{
 
-    vec3 lightDir = normalize(-light.direction);
-    // diffuse shading
-    float diff = max(dot(normal, lightDir), 0.0);
-    // specular shading
-    vec3 reflectDir = reflect(-lightDir, normal);
-    float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-    // combine results
-    vec3 ambient  = light.ambient  * light.ambient * material.ambient;
-    vec3 diffuse  = light.diffuse  * (diff * material.diffuse);
-    vec3 specular = light.specular * (spec * material.specular);
-    return (ambient + diffuse + specular);
-}
-
-vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
+vec3 CalculatePointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
-    vec3 lightDir = normalize(light.position - fragPos);
+    vec3 lightDirection = normalize(light.position - fragPos);
     // diffuse shading
-    float diff = max(dot(normal, lightDir), 0.0);
+    float diff = max(dot(normal, lightDirection), 0.0);
     // specular shading
-    vec3 reflectDir = reflect(-lightDir, normal);
+    vec3 reflectDir = reflect(-lightDirection, normal);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
     // attenuation
-    float distance = length(light.position - fragPos);
-    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
+    float dist = length(light.position - fragPos);
+    float attenuation = 1.0 / (light.constant + light.linear * dist + light.quadratic * (dist * dist));
     // combine results
     vec3 ambient = light.ambient * material.ambient;
     vec3 diffuse = light.diffuse * (diff * material.diffuse);
@@ -175,27 +183,33 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 }
 
 
-vec3 CalcSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
+vec3 CalculateSpotLight(SpotLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
 {
-    vec3 lightDir = normalize(light.position - fragPos);
+    vec3 lightDirection = normalize(light.position - fragPos);
     // diffuse shading
-    float diff = max(dot(normal, lightDir), 0.0);
+    float diff = max(dot(normal, lightDirection), 0.0);
     // specular shading
-    vec3 reflectDir = reflect(-lightDir, normal);
+    vec3 reflectDir = reflect(-lightDirection, normal);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), material.shininess);
-    // attenuation
-    float distance = length(light.position - fragPos);
-    float attenuation = 1.0 / (light.constant + light.linear * distance + light.quadratic * (distance * distance));
-    // spotlight intensity
-    float theta = dot(lightDir, normalize(-light.direction));
+
+
+
+
+    float theta = dot(lightDirection, normalize(-light.direction));
+
+
     float epsilon = light.cutOff - light.outerCutOff;
     float intensity = clamp((theta - light.outerCutOff) / epsilon, 0.0, 1.0);
-    // combine results
+
+    float dist = length(light.position - fragPos);
+    float attenuation = 1.0 / (light.constant + light.linear * dist + light.quadratic * (dist * dist));
+
+    // calculate ambient diffuse and specular
     vec3 ambient = light.ambient * material.ambient;
     vec3 diffuse = light.diffuse * (diff * material.diffuse);
     vec3 specular = light.specular * (spec * material.specular);
-    ambient *= attenuation * intensity;
-    diffuse *= attenuation * intensity;
-    specular *= attenuation * intensity;
+    ambient *= attenuation;
+    diffuse *=  intensity ;
+    specular *= intensity;
     return (ambient + diffuse + specular);
 }
