@@ -54,18 +54,20 @@ void Tumbleweed::render(Scene &scene) {
 
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
-
+    shader->setUniform("isTerrain",0);
     shader->setUniform("material.ambient", material.ambient);
     shader->setUniform("material.diffuse", material.diffuse);
     shader->setUniform("material.specular", material.specular);
     shader->setUniform("material.shininess", material.shininess);
 
 
-    shader->setUniform("sun.position", scene.sun->position);
-    shader->setUniform("sun.ambient",scene.sun->ambient);
-    shader->setUniform("sun.specular",scene.sun->diffuse);
-    shader->setUniform("sun.diffuse",scene.sun->specular);
-
+    if (scene.sun)
+    {
+        shader->setUniform("sun.position", scene.sun->position);
+        shader->setUniform("sun.ambient",scene.sun->ambient);
+        shader->setUniform("sun.specular",scene.sun->diffuse);
+        shader->setUniform("sun.diffuse",scene.sun->specular);
+    }
     int lightCount = scene.lightSources.size();
     int i = 0;
     shader->setUniform("lightsCount",lightCount);

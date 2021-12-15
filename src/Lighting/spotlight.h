@@ -13,10 +13,16 @@
 
 class Spotlight final : public Light {
 public:
-
+    glm::vec3 up{0,1,0};
     std::array<glm::vec3,4> colorLights;
-    float cutOff = glm::cos(glm::radians(12.5f));
-    float outerCutOff = glm::cos(glm::radians(15.0f));
+    float constant = 1.f;
+    float linear = 0.22f;
+    float quadratic = 0.20f;
+    glm::vec3 position;
+    glm::vec3 center;
+    glm::vec3 initial_center;
+    float cutOff = glm::cos(glm::radians(7.f));
+    float outerCutOff = glm::cos(glm::radians(10.0f));
     Spotlight(glm::vec3 position,glm::vec3 direction, int initial_color_index);
     bool update(Scene &scene, float dt) override;
 };
