@@ -124,6 +124,7 @@ void StaticObject::render(Scene &scene) {
         ++l;
         ++k;
     }
+    shader->setUniform("lightsCount",lights_count);
     shader->setUniform("spotlightsCount",spotlightsCount);
     shader->setUniform("Transparency", 1.0f);
     // render mesh

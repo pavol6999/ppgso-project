@@ -26,7 +26,7 @@ bool ColorBulb::update(Scene &scene, float dt) {
         isActive = true;
     }
 
-    int switch_color = static_cast<int>(scene.age) %  2;
+    int switch_color = static_cast<int>(scene.age) %  3;
     if (switch_color > 1)
     {
         int random_color = rand() % 4;

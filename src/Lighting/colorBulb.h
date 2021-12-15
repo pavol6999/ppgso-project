@@ -9,7 +9,7 @@
 #include <array>
 #include "src/Lighting/Light.h"
 #include "src/scene.h"
-class ColorBulb : public Light{
+class ColorBulb final : public Light{
 
 public:
     float constant = 1.0f;

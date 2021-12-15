@@ -75,7 +75,7 @@ void Doors::render(Scene &scene) {
         ++k;
     }
     shader->setUniform("spotlightsCount",spotlightsCount);
-
+    shader->setUniform("lightsCount",lights_count);
 
     shader->setUniform("Transparency", 0.5f);
     shader->setUniform("ModelMatrix", modelMatrix);

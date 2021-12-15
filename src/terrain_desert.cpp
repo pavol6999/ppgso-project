@@ -50,12 +50,17 @@ void terrain_desert::render(Scene &scene) {
         shader->setUniform("sun.specular",scene.sun->diffuse);
         shader->setUniform("sun.diffuse",scene.sun->specular);
     }
+
+    if(scene.age > 1)
+    {
+        int a = 2;
+    }
     int i = 0;
     int lights_count = 0;
     auto j = std::begin(scene.lightSources);
     while (j != std::end(scene.lightSources)) {
         if (scene.lightSources[i]->isActive) {
-            std::string number = std::to_string(i);
+            std::string number = std::to_string(lights_count);
             shader->setUniform("pointLights[" + number + "].position", scene.lightSources[i]->position);
             shader->setUniform("pointLights[" + number + "].ambient", scene.lightSources[i]->ambient);
             shader->setUniform("pointLights[" + number + "].specular", scene.lightSources[i]->specular);
@@ -75,7 +80,7 @@ void terrain_desert::render(Scene &scene) {
     auto l = std::begin(scene.spotlights);
     while (l != std::end(scene.spotlights)) {
         if (scene.spotlights[k]->isActive) {
-            std::string number = std::to_string(k);
+            std::string number = std::to_string(spotlightsCount);
 
             shader->setUniform("spotLights["+number+"].position",scene.spotlights[k]->position);
 
@@ -93,6 +98,8 @@ void terrain_desert::render(Scene &scene) {
         ++l;
         ++k;
     }
+
+    shader->setUniform("lightsCount",lights_count);
     shader->setUniform("spotlightsCount",spotlightsCount);
     shader->setUniform("Transparency", 1.0f);
     // render mesh
