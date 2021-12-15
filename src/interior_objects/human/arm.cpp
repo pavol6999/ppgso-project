@@ -19,8 +19,19 @@ Arm::Arm(Human &human): human(human){
 }
 
 bool Arm::update(Scene &scene, float dt) {
-    rotation.x += cos(age*3)/50;
-    age += dt;
+    if (scene.age > 115 ) {
+        if (! switched) {
+            switched = true;
+            key_frames.push_back({glm::vec3{1,1,1}, position, rotation, scale});
+            key_frames.push_back({glm::vec3{1,1,1}, position, glm::vec3{-2.6, 0, 0}, scale});
+        }
+        animate(dt);
+    }
+    else {
+        rotation.x += cos(age*3)/50;
+        age += dt;
+    }
+
     modelMatrix =
             glm::translate(glm::mat4(1.0f), position + human.position)
             * glm::orientate4(rotation + human.rotation)

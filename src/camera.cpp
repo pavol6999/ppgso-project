@@ -52,9 +52,17 @@ Camera::Camera(float fow, float ratio, float near, float far) {
 
     key_frames.push_back({glm::vec3{0,2,50},glm::vec3{0,2,0},glm::vec3{6,6,6}}); // 79
 
-    key_frames.push_back({glm::vec3{0,2,8},glm::vec3{0,2,0}, glm::vec3{3,3,3}}); // 82
-    key_frames.push_back({glm::vec3{0,2,8},glm::vec3{0,2,0}, glm::vec3{3,3,3}}); // 85
-    key_frames.push_back({glm::vec3{0,2,5},glm::vec3{0,2,0}, glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,10},glm::vec3{0,2,0}, glm::vec3{3,3,3}}); // 82
+    key_frames.push_back({glm::vec3{0,2,10},glm::vec3{0,2,0}, glm::vec3{3,3,3}}); // 85
+    key_frames.push_back({glm::vec3{0,2,4},glm::vec3{0,2,-5}, glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,4},glm::vec3{8,2,0}, glm::vec3{1,1,1}});
+    key_frames.push_back({glm::vec3{0,2,4},glm::vec3{8,2,0}, glm::vec3{3,3,3}});
+
+    key_frames.push_back({glm::vec3{0,2,4},glm::vec3{0,2,-5}, glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,4},glm::vec3{-8,2,0}, glm::vec3{1,1,1}});
+    key_frames.push_back({glm::vec3{0,2,4},glm::vec3{-8,2,0}, glm::vec3{3,3,3}});
+    key_frames.push_back({glm::vec3{0,2,4},glm::vec3{0,2,-5}, glm::vec3{3,3,3}});
+
     key_frames.push_back({glm::vec3{0,0.1,0},glm::vec3{0,2,-5}, glm::vec3{3,3,3}});
     key_frames.push_back({glm::vec3{0,0.5,-2},glm::vec3{-2,2,1}, glm::vec3{5,5,5}});
     key_frames.push_back({glm::vec3{-8,2,-2},glm::vec3{-8,2,5}, glm::vec3{3,3,3}});

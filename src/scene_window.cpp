@@ -78,7 +78,7 @@ void SceneWindow::generateInterior() {
 
     for (int i =0; i < 12; i++) {
         scene.objects.push_back(std::make_unique<SlotMachine>(glm::vec3{-8+i*1.4,0,-5},glm::vec3{0,0,3.14}));
-        if (!(5 <= i && i <= 7) && i != 0)
+        if (!(5 <= i && i <= 7) && i != 0 && i != 1)
             scene.objects.push_back(std::make_unique<SlotMachine>(glm::vec3{-8+i*1.4,0,5},glm::vec3{0,0,0}));
     }
 }
@@ -160,8 +160,8 @@ void SceneWindow::onIdle() {
     time = (float) glfwGetTime();
     scene.age += dt;
 
-    if (scene.age > 1) {
-        //drop_confetti();
+    if (scene.age > 115) {
+        drop_confetti();
     }
 
     glClearColor(0.1f, 0.1f, 0.1f, 1.0f);

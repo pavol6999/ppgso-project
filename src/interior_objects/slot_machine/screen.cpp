@@ -13,6 +13,8 @@ Screen::Screen(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc) {
     if (!shader) shader = std::make_unique<ppgso::Shader>(texture_vert_glsl, texture_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("screentex.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("screen.obj");
+    if (!texture2) texture2 = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("wintex.bmp"));
+
     textureOffset = {0,rand()};
     position = pos;
     rotation = rot;
@@ -21,7 +23,14 @@ Screen::Screen(glm::vec3 pos, glm::vec3 rot, glm::vec3 sc) {
 
 bool Screen::update(Scene &scene, float dt) {
     // Offset for UV mapping, creates illusion of scrolling
-    textureOffset.y -= dt/5;
+    if (scene.age > 115 && !switched) {
+        textureOffset = {0,0};
+        switched = true;
+    }
+    else if (!switched){
+        textureOffset.y -= dt/5;
+    }
+
     generateModelMatrix();
     return true;
 }
@@ -29,13 +38,11 @@ bool Screen::update(Scene &scene, float dt) {
 void Screen::render(Scene &scene) {
     // Disable writing to the depth buffer so we render a "background"
 
-
     // NOTE: this object does not use camera, just renders the entire quad as is
     shader->use();
 
     // Pass UV mapping offset to the shader
     shader->setUniform("LightDirection", {0, 0, 0});
-
 
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
@@ -50,7 +57,11 @@ void Screen::render(Scene &scene) {
     shader->setUniform("Transparency", 1.f);
     // render mesh
     shader->setUniform("ModelMatrix", modelMatrix);
-    shader->setUniform("Texture", *texture);
+    if (switched)
+        shader->setUniform("Texture", *texture2);
+    else
+        shader->setUniform("Texture", *texture);
+
     shader->setUniform("CameraPosition", scene.camera->position);
     shader->setUniform("TextureOffset",textureOffset);
 
@@ -63,3 +74,4 @@ void Screen::render(Scene &scene) {
 std::unique_ptr<ppgso::Mesh> Screen::mesh;
 std::unique_ptr<ppgso::Shader> Screen::shader;
 std::unique_ptr<ppgso::Texture> Screen::texture;
+std::unique_ptr<ppgso::Texture> Screen::texture2;
