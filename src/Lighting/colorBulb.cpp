@@ -15,6 +15,8 @@ ColorBulb::ColorBulb(glm::vec3 pos, int initial_color_index, float turn_on_time)
     diffuse = {colorLights[initial_color_index].x,  colorLights[initial_color_index].y,  colorLights[initial_color_index].z};
     specular = {colorLights[initial_color_index].x,  colorLights[initial_color_index].y,  colorLights[initial_color_index].z};
     position=pos;
+    if (initial_color_index == 0)
+        animate=false;
     turnOn=turn_on_time;
 
 }
@@ -26,15 +28,13 @@ bool ColorBulb::update(Scene &scene, float dt) {
         isActive = true;
     }
 
-    int switch_color = static_cast<int>(scene.age) %  2;
-    if (switch_color > 1)
+    if (animate)
     {
-        int random_color = rand() % 4;
-        ambient = {colorLights[random_color].x * 0.1, colorLights[random_color].y * 0.1, colorLights[random_color].z * 0.1};
-        diffuse = {colorLights[random_color].x,  colorLights[random_color].y,  colorLights[random_color].z};
-        specular = {colorLights[random_color].x,  colorLights[random_color].y,  colorLights[random_color].z};
+        int switch_color = static_cast<int>(scene.age) % 4 ;
+        ambient = {colorLights[switch_color].x * 0.1, colorLights[switch_color].y * 0.1, colorLights[switch_color].z * 0.1};
+        diffuse = {colorLights[switch_color].x,  colorLights[switch_color].y,  colorLights[switch_color].z};
+        specular = {colorLights[switch_color].x,  colorLights[switch_color].y,  colorLights[switch_color].z};
     }
-
 
 
     return true;

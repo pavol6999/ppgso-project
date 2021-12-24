@@ -43,7 +43,7 @@ std::vector<glm::vec3> Utils::generatePoints(int radius, int n, glm::vec2 center
         // if the point is located near the casino
         double d = sqrt(pow((x - center.x),2) + pow((y - center.y),2));
 
-        if ( d < 30 )
+        if ( d < 30 || (y > 30 && y < 50))
             continue;
 
 

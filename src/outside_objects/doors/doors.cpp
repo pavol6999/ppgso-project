@@ -9,9 +9,11 @@
 
 Doors::Doors(glm::vec3 pos) {
     // Initialize static resources if needed
-    if (!shader) shader = std::make_unique<ppgso::Shader>(test_vert_glsl, test_frag_glsl);
+    if (!shader) shader = std::make_unique<ppgso::Shader>(phongo_vert_glsl, phongo_frag_glsl);
     if (!texture) texture = std::make_unique<ppgso::Texture>(ppgso::image::loadBMP("door.bmp"));
     if (!mesh) mesh = std::make_unique<ppgso::Mesh>("doors.obj");
+    material = {{0.19225f,0.19225f,0.19225f},
+                {0.50754f,0.50754f,0.50754f},{0.508273f,0.508273f,0.508273f},0.4};
 
     position = pos;
     scale = {3,3,3};
@@ -19,7 +21,7 @@ Doors::Doors(glm::vec3 pos) {
 
 
 bool Doors::update(Scene &scene, float dt) {
-    if (scene.age >= 82) { animate(dt);}
+    if (scene.age >= 80) { animate(dt);}
     generateModelMatrix();
     return true;
 }
@@ -29,7 +31,7 @@ void Doors::render(Scene &scene) {
     // NOTE: this object does not use camera, just renders the entire quad as is
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
-    shader->setUniform("isTerrain",0);
+
 
     int i = 0;
     int lights_count = 0;
@@ -75,9 +77,9 @@ void Doors::render(Scene &scene) {
         ++k;
     }
     shader->setUniform("spotlightsCount",spotlightsCount);
+    shader->setUniform("lightsCount",lights_count);
 
-
-    shader->setUniform("Transparency", 0.5f);
+    shader->setUniform("Transparency", 0.9f);
     shader->setUniform("ModelMatrix", modelMatrix);
     shader->setUniform("Texture", *texture);
     shader->setUniform("CameraPosition", scene.camera->position);
