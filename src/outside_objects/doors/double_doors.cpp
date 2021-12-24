@@ -1,6 +1,3 @@
-//
-// Created by Administrator on 04/12/2021.
-//
 #include "double_doors.h"
 #include "src/scene.h"
 

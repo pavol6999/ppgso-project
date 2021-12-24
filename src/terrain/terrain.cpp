@@ -22,15 +22,6 @@ Terrain::Terrain(Scene &scene, int width_size = 128, int length_size = 128) {
     for (int z = 0; z < length_size; z++)
         for (int x = 0; x < width_size; x++)
         {
-//            float u = z / (float)(patch_size);
-//            float v = x / (float)(patch_size);
-//
-//            vector<vec3> help;
-//
-//            for (unsigned int l = 0; l<4; l++)
-//            {
-//                help.push_back(bezierPoint(controlPoints[l], u));
-//            }
 
             vec3 vertex = {x/(float)width_size, 0, z/(float)length_size};
             vertex.x *= w;
@@ -120,7 +111,6 @@ void Terrain::render(Scene &scene) {
 
 
     glBindVertexArray(vao);
-    // TODO: Use correct rendering mode to draw the result
 
     glDrawElements(GL_TRIANGLES, (GLsizei) mesh.size() * 3, GL_UNSIGNED_INT , 0);
 }

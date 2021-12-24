@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 06/12/2021.
-//
-
 #ifndef PPGSO_SCREEN_H
 #define PPGSO_SCREEN_H
 

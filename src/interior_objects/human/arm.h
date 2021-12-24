@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 10/12/2021.
-//
-
 #ifndef PPGSO_ARM_H
 #define PPGSO_ARM_H
 

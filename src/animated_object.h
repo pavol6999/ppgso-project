@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 04/12/2021.
-//
-
 #ifndef PPGSO_ANIMATED_OBJECT_H
 #define PPGSO_ANIMATED_OBJECT_H
 #include "object.h"

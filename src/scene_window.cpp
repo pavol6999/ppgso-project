@@ -1,9 +1,4 @@
-//
-// Created by FIIT STU on 11/19/2021.
-//
-
 #include <src/Lighting/colorBulb.h>
-#include <src/interior_objects/confetti.h>
 #include "scene_window.h"
 #include "src/outside_objects/skybox.h"
 #include "src/outside_objects/building.h"
@@ -94,7 +89,6 @@ void SceneWindow::createScene() {
     auto sun = std::make_unique<Sun>(0,glm::vec3{0,100,50});
     scene.camera = move(camera);
 
-    //scene.lightSources.push_back(std::make_unique<Sun>(0, scene.camera->position));
     scene.sun = move(sun);
 
 
@@ -105,11 +99,8 @@ void SceneWindow::createScene() {
     scene.lightSources.push_back(std::make_unique<ColorBulb>(glm::vec3 {-8.1,4,5},0,110));
 
 
-    //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {0,20,-10},glm::vec3{0,2,0},1));
     scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {-20,15,30},glm::vec3{-3,2,2},1,60));
     scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {20,15,30},glm::vec3{3,2,2},2,62));
-
-    //scene.spotlights.push_back(std::make_unique<Spotlight>(glm::vec3 {20,15,30},glm::vec3{3,2,2},2));
 
 
 
@@ -120,9 +111,6 @@ void SceneWindow::createScene() {
     scene.objects.push_back(std::make_unique<Building>());
 
     generateInterior();
-
-    //scene.objects.push_back(std::make_unique<StaticObject>(1, glm::vec3{0,0,10}, glm::vec3{0,0,0},glm::vec3 {1,1,1}));
-    //scene.objects.push_back(std::make_unique<StaticObject>(0,glm::vec3  {0,0,15},glm::vec3 {0,0,1},glm::vec3{1,1,1}));
 
     scene.objects.push_back(std::make_unique<DoubleDoors>(glm::vec3 {0,0,5.8}));
 

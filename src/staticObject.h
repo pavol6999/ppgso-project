@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 11/30/2021.
-//
-
 #ifndef PPGSO_STATICOBJECT_H
 #define PPGSO_STATICOBJECT_H
 

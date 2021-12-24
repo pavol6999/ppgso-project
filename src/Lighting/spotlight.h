@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 12/12/2021.
-//
-
 #ifndef PPGSO_SPOTLIGHT_H
 #define PPGSO_SPOTLIGHT_H
 

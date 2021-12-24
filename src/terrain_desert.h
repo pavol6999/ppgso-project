@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 11/29/2021.
-//
-
 #ifndef PPGSO_TERRAIN_DESERT_H
 #define PPGSO_TERRAIN_DESERT_H
 

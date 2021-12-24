@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 30/11/2021.
-//
-
 #include <shaders/test_vert_glsl.h>
 #include <shaders/test_frag_glsl.h>
 #include "src/scene.h"

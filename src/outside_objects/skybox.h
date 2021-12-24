@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 23/11/2021.
-//
-
 #ifndef PPGSO_SKYBOX_H
 #define PPGSO_SKYBOX_H
 

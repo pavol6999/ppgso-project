@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 07/12/2021.
-//
-
 #ifndef PPGSO_ROULETTE_MOVING_H
 #define PPGSO_ROULETTE_MOVING_H
 #include "src/object.h"

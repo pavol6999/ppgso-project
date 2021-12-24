@@ -1,6 +1,3 @@
-//
-// Created by Administrator on 04/12/2021.
-//
 #include "animated_object.h"
 
 void AnimatedObject::animate(float dt) {

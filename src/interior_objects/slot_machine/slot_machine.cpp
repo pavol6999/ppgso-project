@@ -1,15 +1,4 @@
-//
-// Created by Administrator on 06/12/2021.
-//
-//
-// Created by Administrator on 27/11/2021.
-//
-
-//
-// Created by Administrator on 23/11/2021.
-//
 #include <shaders/texture_vert_glsl.h>
-#include <shaders/texture_frag_glsl.h>
 #include <glm/gtx/euler_angles.hpp>
 
 #include "src/scene.h"

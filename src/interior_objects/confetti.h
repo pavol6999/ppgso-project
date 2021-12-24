@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 14/12/2021.
-//
-
 #ifndef PPGSO_CONFETTI_H
 #define PPGSO_CONFETTI_H
 

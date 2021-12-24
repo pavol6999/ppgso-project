@@ -1,6 +1,3 @@
-//
-// Created by FIIT STU on 12/11/2021.
-//
 #pragma once
 
 #include <glm/glm.hpp>

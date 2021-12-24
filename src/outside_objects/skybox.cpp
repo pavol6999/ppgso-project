@@ -1,6 +1,3 @@
-//
-// Created by Administrator on 23/11/2021.
-//
 #include <shaders/texture_vert_glsl.h>
 #include <shaders/texture_frag_glsl.h>
 #include <shaders/phongo_vert_glsl.h>

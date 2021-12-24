@@ -1,16 +1,3 @@
-//
-// Created by Administrator on 07/12/2021.
-//
-//
-// Created by Administrator on 06/12/2021.
-//
-//
-// Created by Administrator on 27/11/2021.
-//
-
-//
-// Created by Administrator on 23/11/2021.
-//
 #include <shaders/test_vert_glsl.h>
 #include <shaders/test_frag_glsl.h>
 #include <glm/gtx/euler_angles.hpp>

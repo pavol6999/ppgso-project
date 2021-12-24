@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 11/27/2021.
-//
-
 #ifndef PPGSO_VIRTUALOBJECT_H
 #define PPGSO_VIRTUALOBJECT_H
 #include <ppgso/ppgso.h>

@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 29/11/2021.
-//
-
 #ifndef PPGSO_TUMBLEWEED_H
 #define PPGSO_TUMBLEWEED_H
 

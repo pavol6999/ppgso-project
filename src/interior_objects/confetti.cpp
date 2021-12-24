@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 14/12/2021.
-//
-
 #include "confetti.h"
 
 Confetti::Confetti(glm::vec3 p, int c) {

@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 04/12/2021.
-//
-
 #ifndef PPGSO_DOUBLE_DOORS_H
 #define PPGSO_DOUBLE_DOORS_H
 

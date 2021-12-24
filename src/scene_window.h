@@ -1,14 +1,7 @@
-//
-// Created by FIIT STU on 11/19/2021.
-//
 
 #ifndef PPGSO_SCENE_WINDOW_H
 #define PPGSO_SCENE_WINDOW_H
 
-
-//
-// Created by FIIT STU on 11/19/2021.
-//
 #include <ppgso/ppgso.h>
 #include <string>
 #include "scene.h"

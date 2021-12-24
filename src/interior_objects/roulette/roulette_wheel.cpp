@@ -1,9 +1,4 @@
-//
-// Created by Administrator on 07/12/2021.
-//
-
 #include <shaders/texture_vert_glsl.h>
-#include <shaders/texture_frag_glsl.h>
 #include <glm/gtx/euler_angles.hpp>
 
 #include "src/scene.h"

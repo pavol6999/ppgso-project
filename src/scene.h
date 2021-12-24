@@ -26,7 +26,7 @@ class Spotlight;
 
 class Scene {
 public:
-    const glm::vec3 wind2 = {0,2,0};
+    const glm::vec3 wind2 = {0,5,0};
     const glm::vec3 wind = {5,0,0};
     const glm::vec3 gravity = {0,-9,0};
     float age = 0;

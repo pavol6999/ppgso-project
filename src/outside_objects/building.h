@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 27/11/2021.
-//
-
 #ifndef PPGSO_BUILDING_H
 #define PPGSO_BUILDING_H
 

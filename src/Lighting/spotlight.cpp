@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 12/12/2021.
-//
-
 #include "spotlight.h"
 #include <glm/glm.hpp>
 bool Spotlight::update(Scene &scene, float dt) {

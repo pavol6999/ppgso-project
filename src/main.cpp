@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 11/19/2021.
-//
-
 #include <iostream>
 #include <string>
 #include <map>

@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 11/30/2021.
-//
-
 #include <glm/detail/type_vec2.hpp>
 
 #include <bits/stdc++.h>

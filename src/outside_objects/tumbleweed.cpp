@@ -1,10 +1,3 @@
-//
-// Created by Administrator on 29/11/2021.
-//
-
-//
-// Created by Administrator on 23/11/2021.
-//
 #include <shaders/phongo_vert_glsl.h>
 #include <shaders/phongo_frag_glsl.h>
 

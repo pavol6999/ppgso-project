@@ -1,6 +1,3 @@
-//
-// Created by Administrator on 06/12/2021.
-//
 #include "screen.h"
 #include "src/scene.h"
 

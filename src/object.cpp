@@ -16,10 +16,12 @@ void Object::generateModelMatrix() {
 }
 
 bool Object::check_collision(glm::vec3 pos, Scene &scene){
+    // skontroluj pre každý objekt
     for (const auto& obj: scene.objects) {
+        // objekt nemôže mať kolíziu sám so sebou
         if (obj.get() == this) continue;
         if (obj->can_collide) {
-
+            // funkcia na kontrolu kolízie konkrétnej osi
             auto collision = [](float one_s, float one_l, float two_s, float two_l) {
                 return ((two_s <= one_s && one_s <= two_l) || (two_s <= one_l && one_l <= two_l)) ||
                         ((one_s <= two_s && two_s <= one_l) || (one_s <= two_l && two_l <= one_l));
@@ -35,7 +37,7 @@ bool Object::check_collision(glm::vec3 pos, Scene &scene){
             auto collisionZ = collision(pos.z + this->bounding_box[0].z, pos.z + this->bounding_box[1].z,
                                         obj->position.z + obj->bounding_box[0].z,
                                         obj->position.z + obj->bounding_box[1].z);
-
+            //pokiaľ je na všetkých osach priesečník, objekt do niečoho narazil
             if (collisionX && collisionY && collisionZ) {
                 return true;
             }

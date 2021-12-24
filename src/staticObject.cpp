@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 11/30/2021.
-//
-
 #include "staticObject.h"
 #include <shaders/texture_vert_glsl.h>
 #include <shaders/texture_frag_glsl.h>

@@ -1,7 +1,3 @@
-//
-// Created by FIIT STU on 12/11/2021.
-//
-
 #ifndef PPGSO_SUN_H
 #define PPGSO_SUN_H
 
